@@ -10,11 +10,19 @@ public static class HotelData
             {
                 new Hotel()
                 {
-                    Name = "Payment2",
+                    Name = "Hotel2",
+                    PhoneNumber = "0585199391",
+                    Email ="email@gmail.com",
+                    Address =   "Dubai",
+                    Description = "good hotel",
                 },
                 new Hotel()
                 {
-                    Name = "Payment",
+                    Name = "Hotel",
+                    PhoneNumber = "0584875391",
+                    Email ="m@gmail.com",
+                    Address =   "address",
+                    Description = " hotel",
                 }
             };
 
@@ -31,7 +39,11 @@ public static class HotelData
     {
         return new CreateHotelCommand()
         {
-            Name = "Payment2",
+            Name = "Hotel3",
+            PhoneNumber = "0584875391",
+            Email = "m@gmail.com",
+            Address = "address",
+            Description = " hotel",
         };
     }
     public static UpdateHotelCommand MockUpdateHotelCommand()
@@ -39,7 +51,12 @@ public static class HotelData
         return new UpdateHotelCommand()
         {
             Id = 1,
-            Name = "Payment25",
+            Name = "Hotel25",
+            PhoneNumber = "0584875391",
+            Email = "m@gmail.com",
+            Address = "address",
+            Description = " hotel",
+
         };
     }
     public static DeleteHotelByIdCommand MockDeleteHotelByIdCommand()

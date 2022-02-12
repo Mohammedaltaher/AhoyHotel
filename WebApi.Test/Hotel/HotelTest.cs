@@ -39,7 +39,7 @@ public class HotelTest : IClassFixture<SharedDatabaseFixture>
         var result = await handler.Handle(HotelData.MockGetHotelByIdQuery(), CancellationToken.None);
         var Hotel = result.Data;
 
-        Assert.Equal("Payment2", Hotel.Name);
+        Assert.Equal(HotelData.MockHotelSamples()[0].Name, Hotel.Name);
     }
 
 
@@ -50,7 +50,7 @@ public class HotelTest : IClassFixture<SharedDatabaseFixture>
         var result = await handler.Handle(HotelData.MockCreateHotelCommand(), CancellationToken.None);
         var Hotel = result.Data;
 
-        Assert.Equal("Payment2", Hotel.Name);
+        Assert.Equal(HotelData.MockCreateHotelCommand().Name, Hotel.Name);
     }
 
 
@@ -61,7 +61,7 @@ public class HotelTest : IClassFixture<SharedDatabaseFixture>
         var result = await handler.Handle(HotelData.MockUpdateHotelCommand(), CancellationToken.None);
         var Hotel =  result.Data;
 
-        Assert.Equal("Payment25", Hotel.Name);
+        Assert.Equal(HotelData.MockUpdateHotelCommand().Name, Hotel.Name);
     }
 
 
@@ -72,7 +72,7 @@ public class HotelTest : IClassFixture<SharedDatabaseFixture>
         var result = await handler.Handle(HotelData.MockDeleteHotelByIdCommand(), CancellationToken.None);
         var Hotel =  result.Data;
 
-        Assert.Equal("Payment", Hotel.Name);
+        Assert.Equal(HotelData.MockHotelSamples()[1].Name, Hotel.Name);
     }
 }
 
