@@ -10,11 +10,9 @@ public class CreateHotelReviewCommand : IRequest<BaseModel>
     public class CreateHotelReviewCommandHandler : IRequestHandler<CreateHotelReviewCommand, BaseModel>
     {
         private readonly IApplicationDbContext _context;
-        private readonly IMapper _mapper;
-        public CreateHotelReviewCommandHandler(IApplicationDbContext context, IMapper mapper)
+        public CreateHotelReviewCommandHandler(IApplicationDbContext context)
         {
             _context = context;
-            _mapper = mapper;
         }
         public async Task<BaseModel> Handle(CreateHotelReviewCommand command, CancellationToken cancellationToken)
         {

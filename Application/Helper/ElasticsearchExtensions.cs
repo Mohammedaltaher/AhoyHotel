@@ -23,7 +23,6 @@ public static class ElasticsearchExtensions
     private static void AddDefaultMappings(ConnectionSettings settings)
     {
         settings.DefaultMappingFor<Hotel>(m => m.Ignore(p => p.UpdateDate));
-        //settings.DefaultMappingFor<string>(m => m.Ignore(p => p.UpdateDate));
     }
 
     private static void CreateIndex(IElasticClient client, string indexName)

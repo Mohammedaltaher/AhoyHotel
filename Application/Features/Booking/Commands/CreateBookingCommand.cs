@@ -34,19 +34,4 @@ public class CreateBookingCommand : IRequest<BookingModel>
             };
         }
     }
-
-
-}
-public class CreateBookingsCommandValidator : AbstractValidator<CreateBookingCommand>
-{
-    public CreateBookingsCommandValidator()
-    {
-        //RuleFor(x => x.Name)
-        //    .Cascade(CascadeMode.Stop)
-        //    .NotEmpty()
-        //    .Length(0, 50)
-        //    .WithMessage("Name should be not empty. NEVER!")
-        //    .Must(IsValidName).WithMessage("Name should be all letters.");
-    }
-    private bool IsValidName(string name) => name.All(Char.IsLetter);
 }

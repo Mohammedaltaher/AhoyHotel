@@ -28,7 +28,7 @@ public class CreateHotelCommand : MediatR.IRequest<HotelModel>
             await _context.SaveChangesAsync();
             try
             {
-                IndexResponse g =   await _elasticClient.IndexDocumentAsync(hotel);
+                IndexResponse g = await _elasticClient.IndexDocumentAsync(hotel, cancellationToken);
             }
             catch { }
             return new HotelModel
@@ -50,17 +50,12 @@ public class CreateHotelCommandValidator : AbstractValidator<CreateHotelCommand>
             .Cascade(CascadeMode.Stop)
             .NotEmpty()
             .Length(0, 50)
-            .WithMessage("Name should be not empty. NEVER!")
-            .Must(IsValidName).WithMessage("Name should be all letters.");
+            .WithMessage("Name should be not empty. NEVER!");
+        RuleFor(x => x.Email)
+            .Cascade(CascadeMode.Stop)
+            .NotEmpty()
+            .Length(0, 50)
+            .WithMessage("Email should be not empty. NEVER!")
+            .EmailAddress().WithMessage("Wrong Email Format");
     }
-    private bool IsValidName(string name) => name.All(Char.IsLetter);
 }
-//public class MustHaveCreateUserAccountCommandValidator<T, TProperty> : PropertyValidator<T, TProperty>
-//{
-//    public override string Name => "CreateUserAccountCommand";
-
-//    public override bool IsValid(ValidationContext<T> context, TProperty value)
-//    {
-//        return value is IList<CreateUserAccountCommand> list && list.Any();
-//    }
-//}

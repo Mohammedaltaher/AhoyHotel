@@ -1,16 +1,10 @@
 ﻿using Application.Features.Booking.Commands;
-using Application.Features.Common.Commands;
-using Application.Features.HotelFeatures.Commands;
-using Application.Features.HotelFeatures.Queries;
-using Application.Model;
-using System.IO;
-using System.Threading;
 
 namespace WebApi.Controllers;
 public class BookingController : BaseApiController
 {
     /// <summary>
-    /// Creates a New Hotel.
+    /// Creates a New Booking.
     /// </summary>
     /// <param name="command"></param>
     /// <returns></returns>

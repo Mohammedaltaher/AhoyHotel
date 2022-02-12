@@ -11,7 +11,7 @@
         </member>
         <member name="M:WebApi.Controllers.BookingController.Create(Application.Features.Booking.Commands.CreateBookingCommand)">
             <summary>
-            Creates a New Hotel.
+            Creates a New Booking.
             </summary>
             <param name="command"></param>
             <returns></returns>

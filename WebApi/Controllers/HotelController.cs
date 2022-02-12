@@ -60,7 +60,6 @@ public class HotelController : BaseApiController
     /// <param name="hotelId"></param>
     /// <returns></returns>
     [HttpPost("add/image")]
-    /// <param name="image"></param>
     public async Task<IActionResult> AddHotelImage(IFormFile image, int hotelId)
     {
         if (!IsWrongFileExtension(image))

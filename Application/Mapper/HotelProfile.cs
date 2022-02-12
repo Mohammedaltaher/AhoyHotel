@@ -12,8 +12,8 @@ public class HotelProfile : Profile
          .ForMember(from => from.Rooms, to => to.MapFrom(value => value.Rooms))
          .ForMember(from => from.Reviews, to => to.MapFrom(value => value.Reviews))
          .ForMember(from => from.Images, to => to.MapFrom(value => value.Images))
-         .ForMember(from => from.Facilities, to => to.MapFrom(value => value.HotelFacilities))
-         ;
+         .ForMember(from => from.Facilities, to => to.MapFrom(value => value.HotelFacilities));
+
         CreateMap<Review, ReviewDto>();
         CreateMap<Room, RoomDto>();
         CreateMap<HotelImage, HotelImageDto>();

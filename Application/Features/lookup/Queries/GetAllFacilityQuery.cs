@@ -1,5 +1,5 @@
 ﻿namespace Application.Features.FacilityFeatures.Queries;
-public class GetAllFacilityQuery : Pagination, MediatR.IRequest<FacilitiesModel>
+public class GetAllFacilityQuery : Pagination, IRequest<FacilitiesModel>
 {
 
     public class GetAllFacilityQueryHandler : IRequestHandler<GetAllFacilityQuery, FacilitiesModel>

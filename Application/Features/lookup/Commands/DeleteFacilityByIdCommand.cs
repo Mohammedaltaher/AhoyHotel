@@ -1,5 +1,5 @@
 ﻿namespace Application.Features.LookUp.Commands;
-public class DeleteFacilityByIdCommand : MediatR.IRequest<FacilityModel>
+public class DeleteFacilityByIdCommand : IRequest<FacilityModel>
 {
     public int Id { get; set; }
     public class DeleteFacilityByIdCommandHandler : IRequestHandler<DeleteFacilityByIdCommand, FacilityModel>

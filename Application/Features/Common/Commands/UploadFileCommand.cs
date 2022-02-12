@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using FluentValidation;
+using Microsoft.AspNetCore.Http;
 using System.IO;
 
 namespace Application.Features.Common.Commands;
@@ -28,6 +29,14 @@ public class UploadFileCommand : IRequest<string>
             return fileName;
         }
     }
-
+    public class UploadFileCommandValidator : AbstractValidator<UploadFileCommand>
+    {
+        public UploadFileCommandValidator()
+        {
+            RuleFor(x => x.Path)
+                .NotEmpty()
+                .WithMessage("Path should be not empty!");
+        }
+    }
 
 }

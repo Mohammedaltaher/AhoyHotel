@@ -1,4 +1,6 @@
-﻿namespace Application.Features.HotelFeatures.Commands;
+﻿using FluentValidation;
+
+namespace Application.Features.HotelFeatures.Commands;
 public class CreateHotelImageCommand : IRequest<BaseModel>
 {
     public string Url { get; set; }
@@ -25,6 +27,15 @@ public class CreateHotelImageCommand : IRequest<BaseModel>
                 StatusCode = 200,
                 Messege = "Data has been added"
             };
+        }
+    }
+    public class CreateHotelImageCommandValidator : AbstractValidator<CreateHotelImageCommand>
+    {
+        public CreateHotelImageCommandValidator()
+        {
+            RuleFor(x => x.Url)
+                .NotEmpty()
+                .WithMessage("Url should be not empty!");
         }
     }
 
