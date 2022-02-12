@@ -17,6 +17,7 @@ public class SharedDatabaseFixture
             context.Database.EnsureCreated();
 
             context.AddRange(HotelData.MockHotelSamples());
+            context.AddRange(FacilityData.MockFacilitySamples());
             context.SaveChanges();
 
             _databaseInitialized = true;

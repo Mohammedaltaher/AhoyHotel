@@ -21,19 +21,18 @@ public class HotelTest : IClassFixture<SharedDatabaseFixture>
 
 
     [Fact]
-    public async Task Can_Get_All_HotelsAsync()
+    public async Task Can_Get_All_Hotels()
     {
         var handler = new SearchHotelsQueryHandler(MockContext.Object, MockServices.GetMockedMapper<IMapper>());
         var result = await handler.Handle(new SearchHotelsQuery (), CancellationToken.None);
         var Hotel = result.Data;
         Assert.NotNull(Hotel);
         Assert.Equal(HotelData.MockHotelSamples()[1].Name, Hotel[0].Name);
-        Assert.Equal(2, Hotel.Count);
     }
 
 
     [Fact]
-    public async Task Can_Get_Hotel_By_IdAsync()
+    public async Task Can_Get_Hotel_By_Id()
     {
         var handler = new GetHotelByIdQueryHandler(MockContext.Object, MockServices.GetMockedMapper<IMapper>());
         var result = await handler.Handle(HotelData.MockGetHotelByIdQuery(), CancellationToken.None);
@@ -44,7 +43,7 @@ public class HotelTest : IClassFixture<SharedDatabaseFixture>
 
 
     [Fact]
-    public async Task Can_Add_HotelAsync()
+    public async Task Can_Add_Hotel()
     {
         var handler = new CreateHotelCommandHandler(MockContext.Object, MockServices.GetMockedMapper<IMapper>());
         var result = await handler.Handle(HotelData.MockCreateHotelCommand(), CancellationToken.None);
@@ -55,7 +54,7 @@ public class HotelTest : IClassFixture<SharedDatabaseFixture>
 
 
     [Fact]
-    public async Task Can_Update_HotelAsync()
+    public async Task Can_Update_Hotel()
     {
         var handler = new UpdateHotelCommandHandler(MockContext.Object, MockServices.GetMockedMapper<IMapper>());
         var result = await handler.Handle(HotelData.MockUpdateHotelCommand(), CancellationToken.None);
@@ -66,13 +65,13 @@ public class HotelTest : IClassFixture<SharedDatabaseFixture>
 
 
     [Fact]
-    public async Task Can_Delete_HotelAsync()
+    public async Task Can_Delete_Hotel()
     {
         var handler = new DeleteHotelByIdCommandHandler(MockContext.Object, MockServices.GetMockedMapper<IMapper>());
         var result = await handler.Handle(HotelData.MockDeleteHotelByIdCommand(), CancellationToken.None);
         var Hotel =  result.Data;
 
-        Assert.Equal(HotelData.MockHotelSamples()[1].Name, Hotel.Name);
+        Assert.Equal(HotelData.MockHotelSamples()[0].Name, Hotel.Name);
     }
 }
 

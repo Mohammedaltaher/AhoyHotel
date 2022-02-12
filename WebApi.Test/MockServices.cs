@@ -7,6 +7,8 @@ public static class MockServices
         var mappingConfig = new MapperConfiguration(profile =>
         {
             profile.AddProfile(new HotelProfile());
+            profile.AddProfile(new BookingProfile());
+            profile.AddProfile(new LookupProfile());
         });
         var moq = mappingConfig.CreateMapper();
         return moq;
