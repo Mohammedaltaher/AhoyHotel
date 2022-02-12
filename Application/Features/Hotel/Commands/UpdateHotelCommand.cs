@@ -1,11 +1,4 @@
-﻿using Application.Interfaces;
-using Application.Model;
-using Application.Model;
-using AutoMapper;
-using Domain.Entities;
-using MediatR;
-using Nest;
-using System.Linq;
+﻿using Nest;
 namespace Application.Features.HotelFeatures.Commands;
 public class UpdateHotelCommand : MediatR.IRequest<HotelModel>
 {
@@ -30,9 +23,9 @@ public class UpdateHotelCommand : MediatR.IRequest<HotelModel>
         }
         public async Task<HotelModel> Handle(UpdateHotelCommand command, CancellationToken cancellationToken)
         {
-            Hotel Hotel = _context.Hotels.Where(a => a.Id == command.Id).FirstOrDefault();
+            Hotel hotel = _context.Hotels.Where(a => a.Id == command.Id).FirstOrDefault();
 
-            if (Hotel == null)
+            if (hotel == null)
             {
                 return new HotelModel
                 {
@@ -43,22 +36,22 @@ public class UpdateHotelCommand : MediatR.IRequest<HotelModel>
             }
             else
             {
-                Hotel.Name = command.Name;
-                Hotel.Description = command.Description;
-                Hotel.Email = command.Email;
-                Hotel.PhoneNumber = command.PhoneNumber;
-                Hotel.Address = command.Address;
-                Hotel.Location = command.Location;
+                hotel.Name = command.Name;
+                hotel.Description = command.Description;
+                hotel.Email = command.Email;
+                hotel.PhoneNumber = command.PhoneNumber;
+                hotel.Address = command.Address;
+                hotel.Location = command.Location;
 
                 await _context.SaveChangesAsync();
                 try
                 {
-                    await _elasticClient.UpdateAsync<Hotel>(new DocumentPath<Hotel>(Hotel), u => u.Doc(Hotel));
+                    await _elasticClient.UpdateAsync<Hotel>(new DocumentPath<Hotel>(hotel), u => u.Doc(hotel));
                 }
                 catch { }
                 return new HotelModel
                 {
-                    Data = _mapper.Map<HotelDto>(Hotel),
+                    Data = _mapper.Map<HotelDto>(hotel),
                     StatusCode = 200,
                     Messege = "Data has been updated"
                 };

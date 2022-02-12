@@ -1,7 +1,6 @@
 ﻿using Application.Features.FacilityFeatures.Queries;
 using Application.Features.LookUp.Commands;
 using Application.Features.LookUp.Queries;
-using System.Threading;
 
 namespace WebApi.Controllers;
 public class LookupController : BaseApiController
@@ -14,7 +13,7 @@ public class LookupController : BaseApiController
     [HttpPost("facility")]
     public async Task<IActionResult> Create(CreateFacilityCommand command)
     {
-        var Facility = await Mediator.Send(command);
+        FacilityModel Facility = await Mediator.Send(command);
         return StatusCode(Facility.StatusCode,Facility.Data);
     }
 
@@ -28,7 +27,7 @@ public class LookupController : BaseApiController
     public async Task<IActionResult> GetAll(GetAllFacilityQuery query)
     {
 
-        var Facilities = await Mediator.Send(query);
+        FacilitiesModel Facilities = await Mediator.Send(query);
         return StatusCode(Facilities.StatusCode, Facilities.Data);
     }
     /// <summary>
@@ -39,7 +38,7 @@ public class LookupController : BaseApiController
     [HttpGet("facility/{id}")]
     public async Task<IActionResult> GetById(int id)
     {
-        var Facility = await Mediator.Send(new GetFacilityByIdQuery { Id = id });
+        FacilityModel Facility = await Mediator.Send(new GetFacilityByIdQuery { Id = id });
         return StatusCode(Facility.StatusCode,  Facility.Data);
 
     }
@@ -51,7 +50,7 @@ public class LookupController : BaseApiController
     [HttpDelete("facility/{id}")]
     public async Task<IActionResult> Delete(int id)
     {
-        var Facility = await Mediator.Send(new DeleteFacilityByIdCommand { Id = id });
+        FacilityModel Facility = await Mediator.Send(new DeleteFacilityByIdCommand { Id = id });
         return StatusCode(Facility.StatusCode,  Facility.Data);
     }
     /// <summary>
@@ -67,7 +66,7 @@ public class LookupController : BaseApiController
         {
             return BadRequest();
         }
-        var Facility = await Mediator.Send(command);
+        FacilityModel Facility = await Mediator.Send(command);
         return StatusCode(Facility.StatusCode,Facility.Data );
     }
 

@@ -9,13 +9,5 @@ public class RoomDto
     public DateTime CreateDate { get; set; }
 }
 
-public class RoomModel : BaseModel
-{
-    public RoomDto Data { get; set; }
-}
-public class RoomsModel : BaseModel
-{
-    public List<RoomDto> Data { get; set; }
-}
 
 

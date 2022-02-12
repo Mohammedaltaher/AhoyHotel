@@ -8,3 +8,4 @@ global using MediatR;
 global using AutoMapper;
 global using Application.Interfaces;
 global using Application.Model;
+global using Domain.Entities;

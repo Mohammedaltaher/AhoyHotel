@@ -1,6 +1,4 @@
-﻿using Domain.Common;
-
-namespace Domain.Entities;
+﻿namespace Domain.Entities;
 public class Room : BaseEntity
 {
     public int RoomNo { get; set; }

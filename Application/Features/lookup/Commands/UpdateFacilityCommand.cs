@@ -1,11 +1,4 @@
-﻿using Application.Interfaces;
-using Application.Model;
-using Application.Model;
-using AutoMapper;
-using Domain.Entities;
-using MediatR;
-using System.Linq;
-namespace Application.Features.LookUp.Commands;
+﻿namespace Application.Features.LookUp.Commands;
 public class UpdateFacilityCommand : IRequest<FacilityModel>
 {
     public int Id { get; set; }
@@ -23,9 +16,9 @@ public class UpdateFacilityCommand : IRequest<FacilityModel>
         }
         public async Task<FacilityModel> Handle(UpdateFacilityCommand command, CancellationToken cancellationToken)
         {
-            Facility Facility = _context.Facilities.Where(a => a.Id == command.Id).FirstOrDefault();
+            Facility facility = _context.Facilities.Where(a => a.Id == command.Id).FirstOrDefault();
 
-            if (Facility == null)
+            if (facility == null)
             {
                 return new FacilityModel
                 {
@@ -36,13 +29,13 @@ public class UpdateFacilityCommand : IRequest<FacilityModel>
             }
             else
             {
-                Facility.Name = command.Name;
-                Facility.Icon = command.Icon; 
+                facility.Name = command.Name;
+                facility.Icon = command.Icon; 
 
                 await _context.SaveChangesAsync();
                 return new FacilityModel
                 {
-                    Data = _mapper.Map<FacilityDto>(Facility),
+                    Data = _mapper.Map<FacilityDto>(facility),
                     StatusCode = 200,
                     Messege = "Data has been updated"
                 };

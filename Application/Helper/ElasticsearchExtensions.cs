@@ -1,23 +1,20 @@
-using Application.Interfaces;
-using Domain.Entities;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Nest;
-using System;
 
 namespace Application;
 public static class ElasticsearchExtensions
 {
     public static void AddElasticsearch(this IServiceCollection services, IConfiguration configuration)
     {
-        var settings = new ConnectionSettings(new Uri(configuration["elasticsearch:url"]))
+        ConnectionSettings settings = new ConnectionSettings(new Uri(configuration["elasticsearch:url"]))
             .BasicAuthentication(configuration["elasticsearch:username"], configuration["elasticsearch:password"])
             .CertificateFingerprint(configuration["elasticsearch:certificate"])
             .DefaultIndex(configuration["elasticsearch:index"]);
 
         AddDefaultMappings(settings);
 
-        var client = new ElasticClient(settings);
+        ElasticClient client = new(settings);
         services.AddSingleton(client);
 
         CreateIndex(client, configuration["elasticsearch:index"]);

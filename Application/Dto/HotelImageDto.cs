@@ -7,13 +7,4 @@ public class HotelImageDto
     public DateTime CreateDate { get; set; }
 }
 
-public class HotelImageModel : BaseModel
-{
-    public HotelImageDto Data { get; set; }
-}
-public class HotelImagesModel : BaseModel
-{
-    public List<HotelImageDto> Data { get; set; }
-}
-
 

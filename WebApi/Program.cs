@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using NLog;
 using NLog.Web;
 
 namespace WebApi;
@@ -8,7 +9,7 @@ public class Program
 {
     public static void Main(string[] args)
     {
-        var logger = NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
+        Logger logger = NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
         logger.Debug("Application Start");
         CreateHostBuilder(args).Build().Run();
     }

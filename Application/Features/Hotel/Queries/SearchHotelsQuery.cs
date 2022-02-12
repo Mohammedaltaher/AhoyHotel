@@ -1,5 +1,4 @@
-﻿using Domain.Entities;
-using LinqKit;
+﻿using LinqKit;
 using Nest;
 using System.Linq.Expressions;
 
@@ -37,10 +36,10 @@ public class SearchHotelsQuery : Pagination, MediatR.IRequest<HotelsModel>
             {
                 predicate = predicate.And(i => i.PhoneNumber.Contains(query.PhoneNumber));
             }
-            List<Hotel> HotelList = null;
+            List<Hotel> hotelList = null;
             try
             {
-                var searchResponse = await _elasticClient.SearchAsync<Hotel>(s => s
+                ISearchResponse<Hotel> searchResponse = await _elasticClient.SearchAsync<Hotel>(s => s
                                                 .From((query.PageNumber - 1) * query.PageSize).Size(query.PageSize)
                                                 .Query(q => q
                                                 .Match(m => m
@@ -48,14 +47,14 @@ public class SearchHotelsQuery : Pagination, MediatR.IRequest<HotelsModel>
                                                    //.Field(f => f.Email).Query(query.Email)
                                                    //.Field(f => f.PhoneNumber).Query(query.PhoneNumber)
                                                    )));
-                HotelList = searchResponse.Documents.ToList();
+                hotelList = searchResponse.Documents.ToList();
 
             }
             catch
             { }
 
-            if (HotelList == null || HotelList.Count == 0)
-                HotelList = await _context.Hotels
+            if (hotelList == null || hotelList.Count == 0)
+                hotelList = await _context.Hotels
                     .Include(x => x.Reviews)
                     .Include(x => x.Images)
                     .Include(x => x.HotelFacilities).ThenInclude(y => y.Facility)
@@ -65,7 +64,7 @@ public class SearchHotelsQuery : Pagination, MediatR.IRequest<HotelsModel>
                     .Skip((query.PageNumber - 1) * query.PageSize)
                     .Take(query.PageSize)
                     .ToListAsync();
-            if (HotelList == null)
+            if (hotelList == null)
             {
                 return new HotelsModel
                 {
@@ -74,10 +73,10 @@ public class SearchHotelsQuery : Pagination, MediatR.IRequest<HotelsModel>
                     Messege = "No data found"
                 };
             }
-            _mapper.Map<List<HotelDto>>(HotelList);
+            _mapper.Map<List<HotelDto>>(hotelList);
             return new HotelsModel
             {
-                Data = _mapper.Map<List<HotelDto>>(HotelList),
+                Data = _mapper.Map<List<HotelDto>>(hotelList),
                 StatusCode = 200,
                 Messege = "Data found"
             };

@@ -16,10 +16,11 @@ public static class DependencyInjection
 
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(FluentValidationPipelineBehaviorFilter<,>));
 
-        var mapperConfig = new MapperConfiguration(profile =>
+        MapperConfiguration mapperConfig = new(profile =>
         {
             profile.AddProfile(new HotelProfile());
             profile.AddProfile(new LookupProfile());
+            profile.AddProfile(new BookingProfile());
         });
         IMapper mapper = mapperConfig.CreateMapper();
         services.AddSingleton(mapper);

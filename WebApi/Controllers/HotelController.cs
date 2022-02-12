@@ -1,8 +1,6 @@
 ﻿using Application.Features.Common.Commands;
 using Application.Features.HotelFeatures.Commands;
 using Application.Features.HotelFeatures.Queries;
-using System.IO;
-using System.Threading;
 
 namespace WebApi.Controllers;
 public class HotelController : BaseApiController
@@ -15,7 +13,7 @@ public class HotelController : BaseApiController
     [HttpPost]
     public async Task<IActionResult> Create(CreateHotelCommand command)
     {
-        var Hotel = await Mediator.Send(command);
+        HotelModel Hotel = await Mediator.Send(command);
         return StatusCode(Hotel.StatusCode, Hotel.Data);
     }
     /// <summary>
@@ -26,7 +24,7 @@ public class HotelController : BaseApiController
     [HttpPost("add/facility")]
     public async Task<IActionResult> AddHotelFacility(CreateHotelFacilityCommand command)
     {
-        var HotelFacility = await Mediator.Send(command);
+        BaseModel HotelFacility = await Mediator.Send(command);
         return StatusCode(HotelFacility.StatusCode, HotelFacility.Messege);
 
     }
@@ -39,7 +37,7 @@ public class HotelController : BaseApiController
     [HttpPost("add/room")]
     public async Task<IActionResult> AddHotelRoom(CreateHotelRoomsCommand command)
     {
-        var HotelRoom = await Mediator.Send(command);
+        BaseModel HotelRoom = await Mediator.Send(command);
         return StatusCode(HotelRoom.StatusCode, HotelRoom.Messege);
 
     }
@@ -51,7 +49,7 @@ public class HotelController : BaseApiController
     [HttpPost("add/review")]
     public async Task<IActionResult> AddHotelReview(CreateHotelReviewCommand command)
     {
-        var HotelReview = await Mediator.Send(command);
+        BaseModel HotelReview = await Mediator.Send(command);
         return StatusCode(HotelReview.StatusCode, HotelReview.Messege);
 
     }
@@ -69,12 +67,12 @@ public class HotelController : BaseApiController
         {
             return BadRequest("wrong file extension");
         }
-        var ImageUrl = await Mediator.Send(new UploadFileCommand
+        string ImageUrl = await Mediator.Send(new UploadFileCommand
         {
             FormFile = image,
             Path = Directory.GetCurrentDirectory() + @"\Uploads\HotelImages",
         });
-        var Hotelimage = await Mediator.Send(new CreateHotelImageCommand { HotelId = hotelId, Url = ImageUrl });
+        BaseModel Hotelimage = await Mediator.Send(new CreateHotelImageCommand { HotelId = hotelId, Url = ImageUrl });
         return StatusCode(Hotelimage.StatusCode, Hotelimage.Messege);
     }
     /// <summary>
@@ -85,7 +83,7 @@ public class HotelController : BaseApiController
     [HttpPost("search")]
     public async Task<IActionResult> GetAll(SearchHotelsQuery query)
     {
-        var Hotels = await Mediator.Send(query);
+        HotelsModel Hotels = await Mediator.Send(query);
         return StatusCode(Hotels.StatusCode, Hotels.Data);
     }
     /// <summary>
@@ -96,7 +94,7 @@ public class HotelController : BaseApiController
     [HttpGet("{id}")]
     public async Task<IActionResult> GetById(int id)
     {
-        var Hotel = await Mediator.Send(new GetHotelByIdQuery { Id = id });
+        HotelModel Hotel = await Mediator.Send(new GetHotelByIdQuery { Id = id });
         return StatusCode(Hotel.StatusCode, Hotel.Data);
 
     }
@@ -108,7 +106,7 @@ public class HotelController : BaseApiController
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(int id)
     {
-        var Hotel = await Mediator.Send(new DeleteHotelByIdCommand { Id = id });
+        HotelModel Hotel = await Mediator.Send(new DeleteHotelByIdCommand { Id = id });
         return StatusCode(Hotel.StatusCode, Hotel.Data);
     }
     /// <summary>
@@ -124,13 +122,13 @@ public class HotelController : BaseApiController
         {
             return BadRequest();
         }
-        var Hotel = await Mediator.Send(command);
+        HotelModel Hotel = await Mediator.Send(command);
         return StatusCode(Hotel.StatusCode, Hotel.Data);
     }
 
     private bool IsWrongFileExtension(IFormFile file)
     {
-        var extension = "." + file.FileName.Split('.')[file.FileName.Split('.').Length - 1].ToLower();
+        string extension = "." + file.FileName.Split('.')[file.FileName.Split('.').Length - 1].ToLower();
         return (extension == ".pdf" || extension == ".doc" || extension == ".docx" || extension == ".png" || extension == ".jpg" || extension == ".jpeg" || extension == ".gif");
     }
 

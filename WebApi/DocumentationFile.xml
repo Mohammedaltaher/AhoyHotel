@@ -9,6 +9,13 @@
             map Meditor
             </summary>
         </member>
+        <member name="M:WebApi.Controllers.BookingController.Create(Application.Features.Booking.Commands.CreateBookingCommand)">
+            <summary>
+            Creates a New Hotel.
+            </summary>
+            <param name="command"></param>
+            <returns></returns>
+        </member>
         <member name="M:WebApi.Controllers.ErrorController.ErrorLocalDevelopment(Microsoft.AspNetCore.Hosting.IWebHostEnvironment)">
             <summary>
             Development error

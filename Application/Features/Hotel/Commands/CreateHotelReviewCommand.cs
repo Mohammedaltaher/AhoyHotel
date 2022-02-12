@@ -1,7 +1,4 @@
-﻿using Domain.Entities;
-using FluentValidation;
-
-namespace Application.Features.HotelFeatures.Commands;
+﻿namespace Application.Features.HotelFeatures.Commands;
 public class CreateHotelReviewCommand : IRequest<BaseModel>
 {
     public string RevieweName { get; set; }
@@ -21,7 +18,7 @@ public class CreateHotelReviewCommand : IRequest<BaseModel>
         }
         public async Task<BaseModel> Handle(CreateHotelReviewCommand command, CancellationToken cancellationToken)
         {
-            var Review = new Review
+            Review review = new()
             {
                 RevieweName = command.RevieweName,
                 ReviewerEmail = command.ReviewerEmail,
@@ -29,7 +26,7 @@ public class CreateHotelReviewCommand : IRequest<BaseModel>
                 Rating = command.Rating,
                 HotelId = command.HotelId,
             };
-            _context.Reviews.Add(Review);
+            _context.Reviews.Add(review);
             await _context.SaveChangesAsync();
             return new BaseModel
             {

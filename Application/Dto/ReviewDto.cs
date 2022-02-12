@@ -10,13 +10,6 @@ public class ReviewDto
     public DateTime CreateDate { get; set; }
 }
 
-public class ReviewModel : BaseModel
-{
-    public ReviewDto Data { get; set; }
-}
-public class ReviewsModel : BaseModel
-{
-    public List<ReviewDto> Data { get; set; }
-}
+
 
 

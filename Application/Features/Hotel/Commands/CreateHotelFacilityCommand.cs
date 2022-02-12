@@ -1,7 +1,4 @@
-﻿using Domain.Entities;
-using FluentValidation;
-
-namespace Application.Features.HotelFeatures.Commands;
+﻿namespace Application.Features.HotelFeatures.Commands;
 public class CreateHotelFacilityCommand : IRequest<BaseModel>
 {
    
@@ -17,12 +14,12 @@ public class CreateHotelFacilityCommand : IRequest<BaseModel>
         }
         public async Task<BaseModel> Handle(CreateHotelFacilityCommand command, CancellationToken cancellationToken)
         {
-            var Facility = new HotelFacility
+            HotelFacility facility = new()
             {
                 HotelId = command.HotelId,
                 FacilityId = command.FacilityId,
             };
-            _context.HotelFacilities.Add(Facility);
+            _context.HotelFacilities.Add(facility);
             await _context.SaveChangesAsync();
             return new BaseModel
             {

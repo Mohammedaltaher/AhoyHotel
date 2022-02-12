@@ -14,13 +14,13 @@ public class GetHotelByIdQuery : IRequest<HotelModel>
         }
         public Task<HotelModel> Handle(GetHotelByIdQuery query, CancellationToken cancellationToken)
         {
-            var Hotel = _context.Hotels
+            Domain.Entities.Hotel hotel = _context.Hotels
                 .Include(x => x.Reviews)
                     .Include(x => x.Images)
                     .Include(x => x.HotelFacilities).ThenInclude(y => y.Facility)
                     .Include(x => x.Rooms)
                     .Where(a => a.Id == query.Id).AsNoTracking().FirstOrDefault();
-            if (Hotel == null)
+            if (hotel == null)
             {
                 return Task.FromResult(new HotelModel
                 {
@@ -31,7 +31,7 @@ public class GetHotelByIdQuery : IRequest<HotelModel>
             }
             return Task.FromResult(new HotelModel
             {
-                Data = _mapper.Map<HotelDto>(Hotel),
+                Data = _mapper.Map<HotelDto>(hotel),
                 StatusCode = 200,
                 Messege = "Data found"
             });

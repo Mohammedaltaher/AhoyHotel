@@ -14,8 +14,8 @@ public class GetFacilityByIdQuery : IRequest<FacilityModel>
         }
         public Task<FacilityModel> Handle(GetFacilityByIdQuery query, CancellationToken cancellationToken)
         {
-            var Facility = _context.Facilities.Where(a => a.Id == query.Id).AsNoTracking().FirstOrDefault();
-            if (Facility == null)
+            Facility facility = _context.Facilities.Where(a => a.Id == query.Id).AsNoTracking().FirstOrDefault();
+            if (facility == null)
             {
                 return Task.FromResult(new FacilityModel
                 {
@@ -26,7 +26,7 @@ public class GetFacilityByIdQuery : IRequest<FacilityModel>
             }
             return Task.FromResult(new FacilityModel
             {
-                Data = _mapper.Map<FacilityDto>(Facility),
+                Data = _mapper.Map<FacilityDto>(facility),
                 StatusCode = 200,
                 Messege = "Data found"
             });

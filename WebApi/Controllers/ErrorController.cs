@@ -27,7 +27,7 @@ public class ErrorController : BaseApiController
             throw new InvalidOperationException(
                 "This shouldn't be invoked in non-development environments.");
         }
-        var error = HttpContext.Features.Get<IExceptionHandlerFeature>().Error;
+        Exception error = HttpContext.Features.Get<IExceptionHandlerFeature>().Error;
         if (error.GetType().IsAssignableFrom(typeof(ValidationException)))
         {
             return BadRequest(error.Message);
@@ -45,7 +45,7 @@ public class ErrorController : BaseApiController
     [Route("/live")]
     public IActionResult Error()
     {
-        var error = HttpContext.Features.Get<IExceptionHandlerFeature>().Error;
+        Exception error = HttpContext.Features.Get<IExceptionHandlerFeature>().Error;
         if (error.GetType().IsAssignableFrom(typeof(ValidationException)))
         {
             return BadRequest(error.Message);

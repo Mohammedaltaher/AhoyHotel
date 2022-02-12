@@ -1,6 +1,4 @@
-﻿using Domain.Entities;
-using FluentValidation;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using System.IO;
 
 namespace Application.Features.Common.Commands;
@@ -15,7 +13,7 @@ public class UploadFileCommand : IRequest<string>
         
         public async Task<string> Handle(UploadFileCommand command, CancellationToken cancellationToken)
         {
-            var extension = "." + command.FormFile.FileName.Split('.')[command.FormFile.FileName.Split('.').Length - 1];
+            string extension = "." + command.FormFile.FileName.Split('.')[command.FormFile.FileName.Split('.').Length - 1];
 
             string fileName = DateTime.Now.Ticks + extension;
             command.Path = command.Path;
@@ -23,7 +21,7 @@ public class UploadFileCommand : IRequest<string>
             {
                 Directory.CreateDirectory(command.Path);
             }
-            using (var stream = new FileStream(command.Path + @"\" + fileName, FileMode.Create))
+            using (FileStream stream = new(command.Path + @"\" + fileName, FileMode.Create))
             {
                 await command.FormFile.CopyToAsync(stream);
             }

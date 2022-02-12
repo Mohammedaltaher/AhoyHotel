@@ -1,7 +1,4 @@
-﻿using Domain.Entities;
-using Nest;
-
-namespace Application.Features.LookUp.Commands;
+﻿namespace Application.Features.LookUp.Commands;
 public class DeleteFacilityByIdCommand : MediatR.IRequest<FacilityModel>
 {
     public int Id { get; set; }
@@ -16,8 +13,8 @@ public class DeleteFacilityByIdCommand : MediatR.IRequest<FacilityModel>
         }
         public async Task<FacilityModel> Handle(DeleteFacilityByIdCommand command, CancellationToken cancellationToken)
         {
-            var Facility = await _context.Facilities.Where(a => a.Id == command.Id).FirstOrDefaultAsync();
-            if (Facility == null)
+            Facility facility = await _context.Facilities.Where(a => a.Id == command.Id).FirstOrDefaultAsync();
+            if (facility == null)
             {
                 return new FacilityModel
                 {
@@ -26,11 +23,11 @@ public class DeleteFacilityByIdCommand : MediatR.IRequest<FacilityModel>
                     Messege = "No data found"
                 };
             };
-            Facility.IsDeleted = true;
+            facility.IsDeleted = true;
             await _context.SaveChangesAsync();
             return new FacilityModel
             {
-                Data = _mapper.Map<FacilityDto>(Facility),
+                Data = _mapper.Map<FacilityDto>(facility),
                 StatusCode = 200,
                 Messege = "Data has been Deleted"
             };

@@ -19,6 +19,7 @@
     <ProjectReference Include="..\Domain\Domain.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Features\Common\Features\" />
+    <Folder Include="Features\Booking\Queries\" />
+    <Folder Include="Features\Common\Queries\" />
   </ItemGroup>
 </Project>

@@ -1,7 +1,4 @@
-﻿using Domain.Entities;
-using FluentValidation;
-
-namespace Application.Features.HotelFeatures.Commands;
+﻿namespace Application.Features.HotelFeatures.Commands;
 public class CreateHotelImageCommand : IRequest<BaseModel>
 {
     public string Url { get; set; }
@@ -16,7 +13,7 @@ public class CreateHotelImageCommand : IRequest<BaseModel>
         }
         public async Task<BaseModel> Handle(CreateHotelImageCommand command, CancellationToken cancellationToken)
         {
-            var Image = new HotelImage
+            HotelImage Image = new()
             {
                 Url = command.Url,
                 HotelId = command.HotelId,

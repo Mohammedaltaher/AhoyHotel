@@ -1,6 +1,4 @@
-﻿using Domain.Common;
-
-namespace Domain.Entities;
+﻿namespace Domain.Entities;
 public class HotelImage : BaseEntity
 {
     public string Url { get; set; }

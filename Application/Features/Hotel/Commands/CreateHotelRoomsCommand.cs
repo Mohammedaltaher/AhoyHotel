@@ -1,7 +1,4 @@
-﻿using Domain.Entities;
-using FluentValidation;
-
-namespace Application.Features.HotelFeatures.Commands;
+﻿namespace Application.Features.HotelFeatures.Commands;
 public class CreateHotelRoomsCommand : IRequest<BaseModel>
 {
     public int RoomNo { get; set; }
@@ -18,7 +15,7 @@ public class CreateHotelRoomsCommand : IRequest<BaseModel>
         }
         public async Task<BaseModel> Handle(CreateHotelRoomsCommand command, CancellationToken cancellationToken)
         {
-            var room = new Room
+            Room room = new()
             {
                 RoomNo = command.RoomNo,
                 NoOfPersons = command.NoOfPersons,

@@ -1,5 +1,4 @@
-﻿using Domain.Entities;
-using FluentValidation;
+﻿using FluentValidation;
 using Nest;
 
 namespace Application.Features.HotelFeatures.Commands;
@@ -24,17 +23,17 @@ public class CreateHotelCommand : MediatR.IRequest<HotelModel>
         }
         public async Task<HotelModel> Handle(CreateHotelCommand command, CancellationToken cancellationToken)
         {
-            var Hotel = _mapper.Map<Hotel>(command);
-            _context.Hotels.Add(Hotel);
+            Hotel hotel = _mapper.Map<Hotel>(command);
+            _context.Hotels.Add(hotel);
             await _context.SaveChangesAsync();
             try
             {
-              var g =   await _elasticClient.IndexDocumentAsync(Hotel);
+                IndexResponse g =   await _elasticClient.IndexDocumentAsync(hotel);
             }
             catch { }
             return new HotelModel
             {
-                Data = _mapper.Map<HotelDto>(Hotel),
+                Data = _mapper.Map<HotelDto>(hotel),
                 StatusCode = 200,
                 Messege = "Data has been added"
             };

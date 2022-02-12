@@ -1,6 +1,4 @@
-﻿using Application.Features.HotelFeatures.Commands;
-using Application.Features.LookUp.Commands;
-using Domain.Entities;
+﻿using Application.Features.LookUp.Commands;
 
 namespace Application.Common.Mapper;
 public class LookupProfile : Profile

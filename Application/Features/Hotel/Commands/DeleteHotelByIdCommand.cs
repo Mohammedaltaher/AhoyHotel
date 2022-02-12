@@ -1,5 +1,4 @@
-﻿using Domain.Entities;
-using Nest;
+﻿using Nest;
 
 namespace Application.Features.HotelFeatures.Commands;
 public class DeleteHotelByIdCommand : MediatR.IRequest<HotelModel>
@@ -18,8 +17,8 @@ public class DeleteHotelByIdCommand : MediatR.IRequest<HotelModel>
         }
         public async Task<HotelModel> Handle(DeleteHotelByIdCommand command, CancellationToken cancellationToken)
         {
-            var Hotel = await _context.Hotels.Where(a => a.Id == command.Id).FirstOrDefaultAsync();
-            if (Hotel == null)
+            Hotel hotel = await _context.Hotels.Where(a => a.Id == command.Id).FirstOrDefaultAsync();
+            if (hotel == null)
             {
                 return new HotelModel
                 {
@@ -28,18 +27,18 @@ public class DeleteHotelByIdCommand : MediatR.IRequest<HotelModel>
                     Messege = "No data found"
                 };
             };
-            Hotel.IsDeleted = true;
+            hotel.IsDeleted = true;
             //    _context.Hotels.Update(Hotel);
             await _context.SaveChangesAsync();
             try
             {
-                await _elasticClient.DeleteAsync<Hotel>(Hotel);
+                await _elasticClient.DeleteAsync<Hotel>(hotel);
             }
             catch { }
 
             return new HotelModel
             {
-                Data = _mapper.Map<HotelDto>(Hotel),
+                Data = _mapper.Map<HotelDto>(hotel),
                 StatusCode = 200,
                 Messege = "Data has been Deleted"
             };

@@ -13,7 +13,7 @@ public class FluentValidationPipelineBehaviorFilter<TRequest, TResponse> : IPipe
 
     public Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate<TResponse> next)
     {
-        var context = new ValidationContext<TRequest>(request);
+        ValidationContext<TRequest> context = new(request);
         List<ValidationFailure> failures = _validators
             .Select(v => v.Validate(context))
             .SelectMany(result => result.Errors)
@@ -22,7 +22,7 @@ public class FluentValidationPipelineBehaviorFilter<TRequest, TResponse> : IPipe
 
         if (failures.Any())
         {
-            var error = string.Join("\r\n", failures);
+            string error = string.Join("\r\n", failures);
             throw new ValidationException(error);
         }
 

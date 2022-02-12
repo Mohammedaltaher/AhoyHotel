@@ -1,5 +1,4 @@
 ﻿using Application.Features.HotelFeatures.Commands;
-using Domain.Entities;
 
 namespace Application.Common.Mapper;
 public class HotelProfile : Profile

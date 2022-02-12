@@ -1,5 +1,4 @@
-﻿using Domain.Common;
-using System.Collections.Generic;
+﻿
 
 namespace Domain.Entities;
 public class Hotel : BaseEntity

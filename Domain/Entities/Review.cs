@@ -1,6 +1,4 @@
-﻿using Domain.Common;
-
-namespace Domain.Entities;
+﻿namespace Domain.Entities;
 public class Review : BaseEntity
 {
     public string RevieweName { get; set; }

@@ -1,8 +1,4 @@
-﻿using Domain.Entities;
-using Nest;
-using System.Linq.Expressions;
-
-namespace Application.Features.FacilityFeatures.Queries;
+﻿namespace Application.Features.FacilityFeatures.Queries;
 public class GetAllFacilityQuery : Pagination, MediatR.IRequest<FacilitiesModel>
 {
 
@@ -18,12 +14,12 @@ public class GetAllFacilityQuery : Pagination, MediatR.IRequest<FacilitiesModel>
         public async Task<FacilitiesModel> Handle(GetAllFacilityQuery query, CancellationToken cancellationToken)
         {
            
-            List<Facility> FacilityList = await _context.Facilities
+            List<Facility> facilityList = await _context.Facilities
                     .OrderBy(o => o.Name)
                     .Skip((query.PageNumber - 1) * query.PageSize)
                     .Take(query.PageSize)
                     .ToListAsync();
-            if (FacilityList == null)
+            if (facilityList == null)
             {
                 return new FacilitiesModel
                 {
@@ -32,10 +28,10 @@ public class GetAllFacilityQuery : Pagination, MediatR.IRequest<FacilitiesModel>
                     Messege = "No data found"
                 };
             }
-            _mapper.Map<List<FacilityDto>>(FacilityList);
+            _mapper.Map<List<FacilityDto>>(facilityList);
             return new FacilitiesModel
             {
-                Data = _mapper.Map<List<FacilityDto>>(FacilityList),
+                Data = _mapper.Map<List<FacilityDto>>(facilityList),
                 StatusCode = 200,
                 Messege = "Data found"
             };

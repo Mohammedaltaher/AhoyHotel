@@ -1,5 +1,4 @@
-﻿using Domain.Entities;
-using FluentValidation;
+﻿using FluentValidation;
 
 namespace Application.Features.LookUp.Commands;
 public class CreateFacilityCommand : IRequest<FacilityModel>
@@ -18,12 +17,12 @@ public class CreateFacilityCommand : IRequest<FacilityModel>
         }
         public async Task<FacilityModel> Handle(CreateFacilityCommand command, CancellationToken cancellationToken)
         {
-            var Facility = _mapper.Map<Facility>(command);
-            _context.Facilities.Add(Facility);
+            Facility facility = _mapper.Map<Facility>(command);
+            _context.Facilities.Add(facility);
             await _context.SaveChangesAsync();
             return new FacilityModel
             {
-                Data = _mapper.Map<FacilityDto>(Facility),
+                Data = _mapper.Map<FacilityDto>(facility),
                 StatusCode = 200,
                 Messege = "Data has been added"
             };
