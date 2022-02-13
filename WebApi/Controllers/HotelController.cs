@@ -28,7 +28,6 @@ public class HotelController : BaseApiController
         return StatusCode(HotelFacility.StatusCode, HotelFacility.Messege);
 
     }
-
     /// <summary>
     /// Add Hotel Room.
     /// </summary>
@@ -78,7 +77,6 @@ public class HotelController : BaseApiController
     /// Search Hotels.
     /// </summary>
     /// <returns></returns>
-
     [HttpPost("search")]
     public async Task<IActionResult> GetAll(SearchHotelsQuery query)
     {
@@ -124,7 +122,6 @@ public class HotelController : BaseApiController
         HotelModel Hotel = await Mediator.Send(command);
         return StatusCode(Hotel.StatusCode, Hotel.Data);
     }
-
     private bool IsWrongFileExtension(IFormFile file)
     {
         string extension = "." + file.FileName.Split('.')[file.FileName.Split('.').Length - 1].ToLower();

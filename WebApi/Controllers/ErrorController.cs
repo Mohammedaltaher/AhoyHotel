@@ -22,18 +22,16 @@ public class ErrorController : BaseApiController
     [Route("/development")]
     public IActionResult ErrorLocalDevelopment([FromServices] IWebHostEnvironment webHostEnvironment)
     {
-        if (webHostEnvironment.EnvironmentName != "Development")
-        {
-            throw new InvalidOperationException(
-                "This shouldn't be invoked in non-development environments.");
-        }
         Exception error = HttpContext.Features.Get<IExceptionHandlerFeature>().Error;
+
         if (error.GetType().IsAssignableFrom(typeof(ValidationException)))
         {
             return BadRequest(error.Message);
         }
         ObjectResult problem = Problem(detail: error.StackTrace, title: error.Message);
+
         _logger.LogError(problem.ToString());
+
         return problem;
     }
     /// <summary>
@@ -46,12 +44,9 @@ public class ErrorController : BaseApiController
     public IActionResult Error()
     {
         Exception error = HttpContext.Features.Get<IExceptionHandlerFeature>().Error;
-        if (error.GetType().IsAssignableFrom(typeof(ValidationException)))
-        {
-            return BadRequest(error.Message);
-        }
-        ObjectResult problem = Problem(title: error.Message);
+
         _logger.LogError(Problem(detail: error.StackTrace, title: error.Message).ToString());
-        return problem;
+
+        return Problem(title: error.Message);
     }
 }

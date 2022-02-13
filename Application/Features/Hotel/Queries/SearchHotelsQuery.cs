@@ -1,4 +1,5 @@
 ﻿using LinqKit;
+using Microsoft.Extensions.Logging;
 using Nest;
 using System.Linq.Expressions;
 
@@ -14,11 +15,13 @@ public class SearchHotelsQuery : Pagination, MediatR.IRequest<HotelsModel>
         private readonly IApplicationDbContext _context;
         private readonly ElasticClient _elasticClient;
         private readonly IMapper _mapper;
-        public SearchHotelsQueryHandler(IApplicationDbContext context, IMapper mapper, ElasticClient elasticClient = null)
+        private readonly ILogger _logger;
+        public SearchHotelsQueryHandler(IApplicationDbContext context, IMapper mapper, ILogger<SearchHotelsQuery> logger, ElasticClient elasticClient = null)
         {
             _context = context;
             _mapper = mapper;
             _elasticClient = elasticClient;
+            _logger = logger;
         }
         public async Task<HotelsModel> Handle(SearchHotelsQuery query, CancellationToken cancellationToken)
         {
@@ -50,8 +53,11 @@ public class SearchHotelsQuery : Pagination, MediatR.IRequest<HotelsModel>
                 hotelList = searchResponse.Documents.ToList();
 
             }
-            catch
-            { }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.ToString());
+
+            }
 
             if (hotelList == null || hotelList.Count == 0)
                 hotelList = await _context.Hotels

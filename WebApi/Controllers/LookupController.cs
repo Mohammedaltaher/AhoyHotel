@@ -16,13 +16,10 @@ public class LookupController : BaseApiController
         FacilityModel Facility = await Mediator.Send(command);
         return StatusCode(Facility.StatusCode,Facility.Data);
     }
-
-
     /// <summary>
     /// Gets all Facilitys.
     /// </summary>
     /// <returns></returns>
-
     [HttpPost("facility/getAll")]
     public async Task<IActionResult> GetAll(GetAllFacilityQuery query)
     {
@@ -69,7 +66,4 @@ public class LookupController : BaseApiController
         FacilityModel Facility = await Mediator.Send(command);
         return StatusCode(Facility.StatusCode,Facility.Data );
     }
-
-   
-
 }

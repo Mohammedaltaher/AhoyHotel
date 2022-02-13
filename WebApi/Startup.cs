@@ -19,7 +19,7 @@ public class Startup
         services.AddApplication(Configuration);
         services.AddSwaggerGen(c =>
         {
-            c.IncludeXmlComments(string.Format(@"{0}DocumentationFile.xml", System.AppDomain.CurrentDomain.BaseDirectory));
+            c.IncludeXmlComments(string.Format(@"{0}DocumentationFile.xml", AppDomain.CurrentDomain.BaseDirectory));
             c.SwaggerDoc("v1", new OpenApiInfo
             {
                 Version = "v1",

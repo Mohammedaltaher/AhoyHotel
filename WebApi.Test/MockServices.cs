@@ -1,4 +1,7 @@
 using Application.Common.Mapper;
+using Application.Features.HotelFeatures.Queries;
+using Microsoft.Extensions.Logging;
+
 namespace WebApi.Test;
 public static class MockServices
 {
@@ -12,6 +15,10 @@ public static class MockServices
         });
         var moq = mappingConfig.CreateMapper();
         return moq;
+    }
+    public static ILogger<T> GetMockedLoger<T>()
+    {
+        return Mock.Of<ILogger<T>>();
     }
 
 }

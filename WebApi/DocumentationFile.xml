@@ -6,7 +6,7 @@
     <members>
         <member name="P:WebApi.Controllers.BaseApiController.Mediator">
             <summary>
-            map Meditor
+            Get Meditor 
             </summary>
         </member>
         <member name="M:WebApi.Controllers.BookingController.Create(Application.Features.Booking.Commands.CreateBookingCommand)">
