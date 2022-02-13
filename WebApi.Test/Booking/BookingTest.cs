@@ -21,7 +21,7 @@ public class BookingTest : IClassFixture<SharedDatabaseFixture>
         BookingModel  result = await handler.Handle(BookingData.MockCreateBookingCommand(), CancellationToken.None);
         BookingDto  Booking = result.Data;
 
-        Assert.Equal(BookingData.MockCreateBookingCommand().UserName, Booking.UserName);
+        Assert.Equal(BookingData.MockCreateBookingCommand().UserName, Booking.UserName); 
     }
 
 }
