@@ -1,4 +1,5 @@
-﻿using Nest;
+﻿using Microsoft.Extensions.Logging;
+using Nest;
 
 namespace Application.Features.HotelFeatures.Commands;
 public class DeleteHotelByIdCommand : MediatR.IRequest<HotelModel>
@@ -9,11 +10,13 @@ public class DeleteHotelByIdCommand : MediatR.IRequest<HotelModel>
         private readonly IApplicationDbContext _context;
         private readonly IMapper _mapper;
         private readonly ElasticClient _elasticClient;
-        public DeleteHotelByIdCommandHandler(IApplicationDbContext context, IMapper mapper, ElasticClient elasticClient = null)
+        private readonly ILogger _logger;
+        public DeleteHotelByIdCommandHandler(IApplicationDbContext context, IMapper mapper, ILogger<DeleteHotelByIdCommand> logger, ElasticClient elasticClient = null)
         {
             _context = context;
             _mapper = mapper;
             _elasticClient = elasticClient;
+            _logger = logger;
         }
         public async Task<HotelModel> Handle(DeleteHotelByIdCommand command, CancellationToken cancellationToken)
         {
@@ -28,13 +31,10 @@ public class DeleteHotelByIdCommand : MediatR.IRequest<HotelModel>
                 };
             };
             hotel.IsDeleted = true;
-            //    _context.Hotels.Update(Hotel);
             await _context.SaveChangesAsync();
-            try
-            {
-                await _elasticClient.DeleteAsync<Hotel>(hotel);
-            }
-            catch { }
+
+            try { await _elasticClient.DeleteAsync<Hotel>(hotel); }
+            catch (Exception ex) { _logger.LogError(ex.ToString()); }
 
             return new HotelModel
             {

@@ -1,4 +1,5 @@
-﻿using Nest;
+﻿using Microsoft.Extensions.Logging;
+using Nest;
 namespace Application.Features.HotelFeatures.Commands;
 public class UpdateHotelCommand : MediatR.IRequest<HotelModel>
 {
@@ -14,12 +15,13 @@ public class UpdateHotelCommand : MediatR.IRequest<HotelModel>
         private readonly IApplicationDbContext _context;
         private readonly IMapper _mapper;
         private readonly ElasticClient _elasticClient;
-
-        public UpdateHotelCommandHandler(IApplicationDbContext context, IMapper mapper, ElasticClient elasticClient = null)
+        private readonly ILogger _logger;
+        public UpdateHotelCommandHandler(IApplicationDbContext context, IMapper mapper,ILogger<UpdateHotelCommand> logger, ElasticClient elasticClient = null)
         {
             _context = context;
             _mapper = mapper;
             _elasticClient = elasticClient;
+            _logger = logger;
         }
         public async Task<HotelModel> Handle(UpdateHotelCommand command, CancellationToken cancellationToken)
         {
@@ -48,7 +50,7 @@ public class UpdateHotelCommand : MediatR.IRequest<HotelModel>
                 {
                     await _elasticClient.UpdateAsync<Hotel>(new DocumentPath<Hotel>(hotel), u => u.Doc(hotel));
                 }
-                catch { }
+                catch(Exception ex) { _logger.LogError(ex.ToString()); }
                 return new HotelModel
                 {
                     Data = _mapper.Map<HotelDto>(hotel),

@@ -1,4 +1,3 @@
-using System.Data.Common;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Context;
 
@@ -12,7 +11,7 @@ public class SharedDatabaseFixture
     {
         if (!_databaseInitialized)
         {
-            using ApplicationDbContext? context = CreateContext();
+            using ApplicationDbContext context = CreateContext();
             context.Database.EnsureDeleted();
             context.Database.EnsureCreated();
 

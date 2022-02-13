@@ -1,24 +1,19 @@
 using Application.Common.Mapper;
-using Application.Features.HotelFeatures.Queries;
 using Microsoft.Extensions.Logging;
 
 namespace WebApi.Test;
 public static class MockServices
 {
-    public static IMapper GetMockedMapper<T>()
+    public static IMapper GetMockedMapper<I>()
     {
-        var mappingConfig = new MapperConfiguration(profile =>
+        MapperConfiguration mappingConfig = new(profile =>
         {
             profile.AddProfile(new HotelProfile());
             profile.AddProfile(new BookingProfile());
             profile.AddProfile(new LookupProfile());
         });
-        var moq = mappingConfig.CreateMapper();
-        return moq;
+        return mappingConfig.CreateMapper();
     }
-    public static ILogger<T> GetMockedLoger<T>()
-    {
-        return Mock.Of<ILogger<T>>();
-    }
+    public static ILogger<T> GetMockedLoger<T>() => new Mock<ILogger<T>>().Object;
 
 }

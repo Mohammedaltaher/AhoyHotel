@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using Microsoft.Extensions.Logging;
 using Nest;
 
 namespace Application.Features.HotelFeatures.Commands;
@@ -15,11 +16,13 @@ public class CreateHotelCommand : MediatR.IRequest<HotelModel>
         private readonly IApplicationDbContext _context;
         private readonly IMapper _mapper;
         private readonly ElasticClient _elasticClient;
-        public CreateHotelCommandHandler(IApplicationDbContext context, IMapper mapper, ElasticClient elasticClient = null)
+        private readonly ILogger _logger;
+        public CreateHotelCommandHandler(IApplicationDbContext context, IMapper mapper, ILogger<CreateHotelCommand> logger, ElasticClient elasticClient = null)
         {
             _context = context;
             _mapper = mapper;
             _elasticClient = elasticClient;
+            _logger = logger;
         }
         public async Task<HotelModel> Handle(CreateHotelCommand command, CancellationToken cancellationToken)
         {
@@ -28,9 +31,9 @@ public class CreateHotelCommand : MediatR.IRequest<HotelModel>
             await _context.SaveChangesAsync();
             try
             {
-                IndexResponse g = await _elasticClient.IndexDocumentAsync(hotel, cancellationToken);
+                await _elasticClient.IndexDocumentAsync(hotel, cancellationToken);
             }
-            catch { }
+            catch (Exception ex) { _logger.LogError(ex.ToString()); }
             return new HotelModel
             {
                 Data = _mapper.Map<HotelDto>(hotel),

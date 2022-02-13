@@ -17,9 +17,9 @@ public class BookingTest : IClassFixture<SharedDatabaseFixture>
     [Fact]
     public async Task Can_Add_Booking()
     {
-        var handler = new CreateBookingCommandHandler(MockContext.Object, MockServices.GetMockedMapper<IMapper>());
-        var result = await handler.Handle(BookingData.MockCreateBookingCommand(), CancellationToken.None);
-        var Booking = result.Data;
+        CreateBookingCommandHandler  handler = new(MockContext.Object, MockServices.GetMockedMapper<IMapper>());
+        BookingModel  result = await handler.Handle(BookingData.MockCreateBookingCommand(), CancellationToken.None);
+        BookingDto  Booking = result.Data;
 
         Assert.Equal(BookingData.MockCreateBookingCommand().UserName, Booking.UserName);
     }
