@@ -26,9 +26,10 @@ public class CreateBookingCommand : IRequest<BookingModel>
             Booking booking = _mapper.Map<Booking>(command);
             _context.Bookings.Add(booking);
             await _context.SaveChangesAsync();
-            booking = _context.Bookings
-                .Include(x => x.Room).ThenInclude(x => x.Hotel)
-                .FirstOrDefault(o => o.Id == booking.Id);
+           
+            //booking = _context.Bookings
+            //    .Include(x => x.Room).ThenInclude(x => x.Hotel)
+            //    .FirstOrDefault(o => o.Id == booking.Id);
             return new BookingModel
             {
                 Data = _mapper.Map<BookingDto>(booking),
