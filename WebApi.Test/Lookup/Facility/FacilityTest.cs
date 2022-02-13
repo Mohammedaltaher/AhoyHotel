@@ -27,7 +27,7 @@ public class FacilityTest : IClassFixture<SharedDatabaseFixture>
         FacilitiesModel result = await handler.Handle(new GetAllFacilityQuery (), CancellationToken.None);
         List<FacilityDto> Facility = result.Data;
         Assert.NotNull(Facility);
-        Assert.Equal(FacilityData.MockFacilitySamples()[1].Name, Facility[0].Name);
+        Assert.Equal(FacilityData.MockFacilitySamples()[0].Name, Facility[0].Name);
     }
 
 
