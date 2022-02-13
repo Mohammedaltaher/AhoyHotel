@@ -14,7 +14,7 @@ public class LookupController : BaseApiController
     public async Task<IActionResult> Create(CreateFacilityCommand command)
     {
         FacilityModel Facility = await Mediator.Send(command);
-        return StatusCode(Facility.StatusCode,Facility.Data);
+        return StatusCode(Facility.StatusCode, Facility.Data == null ? Facility.Messege : Facility.Data);
     }
     /// <summary>
     /// Gets all Facilitys.
@@ -25,7 +25,7 @@ public class LookupController : BaseApiController
     {
 
         FacilitiesModel Facilities = await Mediator.Send(query);
-        return StatusCode(Facilities.StatusCode, Facilities.Data);
+        return StatusCode(Facilities.StatusCode, Facilities.Data == null ? Facilities.Messege : Facilities.Data);
     }
     /// <summary>
     /// Gets Facility by Id.
@@ -36,7 +36,7 @@ public class LookupController : BaseApiController
     public async Task<IActionResult> GetById(int id)
     {
         FacilityModel Facility = await Mediator.Send(new GetFacilityByIdQuery { Id = id });
-        return StatusCode(Facility.StatusCode,  Facility.Data);
+        return StatusCode(Facility.StatusCode, Facility.Data == null ? Facility.Messege : Facility.Data);
 
     }
     /// <summary>
@@ -48,7 +48,7 @@ public class LookupController : BaseApiController
     public async Task<IActionResult> Delete(int id)
     {
         FacilityModel Facility = await Mediator.Send(new DeleteFacilityByIdCommand { Id = id });
-        return StatusCode(Facility.StatusCode,  Facility.Data);
+        return StatusCode(Facility.StatusCode, Facility.Data == null ? Facility.Messege : Facility.Data);
     }
     /// <summary>
     /// Updates the Facility  based on Id.   
@@ -64,6 +64,6 @@ public class LookupController : BaseApiController
             return BadRequest();
         }
         FacilityModel Facility = await Mediator.Send(command);
-        return StatusCode(Facility.StatusCode,Facility.Data );
+        return StatusCode(Facility.StatusCode, Facility.Data == null ? Facility.Messege : Facility.Data);
     }
 }

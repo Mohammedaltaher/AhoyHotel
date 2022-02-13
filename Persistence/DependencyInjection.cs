@@ -10,17 +10,15 @@ public static class DependencyInjection
 {
     public static void AddPersistence(this IServiceCollection services, IConfiguration configuration)
     {
-
         services.AddDbContext<ApplicationDbContext>(options =>
             options.UseSqlServer(
                 configuration.GetConnectionString("DefaultConnection"),
                 b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)));
         services.AddScoped<IApplicationDbContext>(provider => provider.GetService<ApplicationDbContext>());
-       // services.AddElasticsearch(configuration);
+
+        // services.AddElasticsearch(configuration);
         //services.AddScoped<IElasticSearchService, ElasticSearchService>();
         //services.AddScoped<IElasticSearchService>(provider => provider.GetService<ElasticSearchService>());
-
-
     }
 }
 

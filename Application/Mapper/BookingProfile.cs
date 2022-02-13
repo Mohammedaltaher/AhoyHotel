@@ -1,4 +1,4 @@
-﻿using Application.Features.Booking.Commands;
+﻿using Application.FeaturesBooking.Commands;
 
 namespace Application.Common.Mapper;
 public class BookingProfile : Profile
@@ -7,7 +7,9 @@ public class BookingProfile : Profile
     {
         CreateMap<Booking, CreateBookingCommand>();
         CreateMap<CreateBookingCommand, Booking>();
-        CreateMap<Booking, BookingDto>();
+        CreateMap<Booking, BookingDto>()
+         .ForMember(from => from.Room, to => to.MapFrom(value => value.Room))
+            ;
     }
 }
 

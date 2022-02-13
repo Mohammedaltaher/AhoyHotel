@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
-
-namespace Application.Features.Booking.Commands;
+using Domain.Entities;
+namespace Application.FeaturesBooking.Commands;
 public class CreateBookingCommand : IRequest<BookingModel>
 {
     public DateTime CheckIn { get; set; }
@@ -23,12 +23,15 @@ public class CreateBookingCommand : IRequest<BookingModel>
         }
         public async Task<BookingModel> Handle(CreateBookingCommand command, CancellationToken cancellationToken)
         {
-            Domain.Entities.Booking Booking = _mapper.Map<Domain.Entities.Booking>(command);
-            _context.Bookings.Add(Booking);
+            Booking booking = _mapper.Map<Booking>(command);
+            _context.Bookings.Add(booking);
             await _context.SaveChangesAsync();
+            booking = _context.Bookings
+                .Include(x => x.Room).ThenInclude(x => x.Hotel)
+                .FirstOrDefault(o => o.Id == booking.Id);
             return new BookingModel
             {
-                Data = _mapper.Map<BookingDto>(Booking),
+                Data = _mapper.Map<BookingDto>(booking),
                 StatusCode = 200,
                 Messege = "Data has been added"
             };

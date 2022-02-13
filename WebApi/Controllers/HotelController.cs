@@ -81,7 +81,7 @@ public class HotelController : BaseApiController
     public async Task<IActionResult> GetAll(SearchHotelsQuery query)
     {
         HotelsModel Hotels = await Mediator.Send(query);
-        return StatusCode(Hotels.StatusCode, Hotels.Data);
+        return StatusCode(Hotels.StatusCode, Hotels.Data == null ? Hotels.Messege : Hotels.Data);
     }
     /// <summary>
     /// Gets Hotel  by Id.
@@ -92,7 +92,7 @@ public class HotelController : BaseApiController
     public async Task<IActionResult> GetById(int id)
     {
         HotelModel Hotel = await Mediator.Send(new GetHotelByIdQuery { Id = id });
-        return StatusCode(Hotel.StatusCode, Hotel.Data);
+        return StatusCode(Hotel.StatusCode, Hotel.Data == null ? Hotel.Messege : Hotel.Data);
 
     }
     /// <summary>
@@ -104,7 +104,7 @@ public class HotelController : BaseApiController
     public async Task<IActionResult> Delete(int id)
     {
         HotelModel Hotel = await Mediator.Send(new DeleteHotelByIdCommand { Id = id });
-        return StatusCode(Hotel.StatusCode, Hotel.Data);
+        return StatusCode(Hotel.StatusCode, Hotel.Data == null ? Hotel.Messege : Hotel.Data);
     }
     /// <summary>
     /// Updates the  Entity based on Id.   
@@ -120,7 +120,7 @@ public class HotelController : BaseApiController
             return BadRequest();
         }
         HotelModel Hotel = await Mediator.Send(command);
-        return StatusCode(Hotel.StatusCode, Hotel.Data);
+        return StatusCode(Hotel.StatusCode, Hotel.Data == null ? Hotel.Messege : Hotel.Data);
     }
     private bool IsWrongFileExtension(IFormFile file)
     {

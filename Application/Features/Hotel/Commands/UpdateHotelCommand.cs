@@ -48,7 +48,7 @@ public class UpdateHotelCommand : MediatR.IRequest<HotelModel>
                 await _context.SaveChangesAsync();
                 try
                 {
-                    await _elasticClient.UpdateAsync<Hotel>(new DocumentPath<Hotel>(hotel), u => u.Doc(hotel));
+                    await _elasticClient.UpdateAsync(new DocumentPath<Hotel>(hotel), u => u.Doc(hotel));
                 }
                 catch(Exception ex) { _logger.LogError(ex.ToString()); }
                 return new HotelModel

@@ -1,4 +1,4 @@
-using static Application.Features.Booking.Commands.CreateBookingCommand;
+using static Application.FeaturesBooking.Commands.CreateBookingCommand;
 
 namespace WebApi.Test;
 public class BookingTest : IClassFixture<SharedDatabaseFixture>

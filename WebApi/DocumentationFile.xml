@@ -9,7 +9,7 @@
             Get Meditor 
             </summary>
         </member>
-        <member name="M:WebApi.Controllers.BookingController.Create(Application.Features.Booking.Commands.CreateBookingCommand)">
+        <member name="M:WebApi.Controllers.BookingController.Create(Application.FeaturesBooking.Commands.CreateBookingCommand)">
             <summary>
             Creates a New Booking.
             </summary>

@@ -1,4 +1,4 @@
-﻿using Application.Features.Booking.Commands;
+﻿using Application.FeaturesBooking.Commands;
 
 namespace WebApi.Controllers;
 public class BookingController : BaseApiController
@@ -12,6 +12,6 @@ public class BookingController : BaseApiController
     public async Task<IActionResult> Create(CreateBookingCommand command)
     {
         BookingModel booking = await Mediator.Send(command);
-        return StatusCode(booking.StatusCode, booking.Data);
+        return StatusCode(booking.StatusCode, booking.Data == null ? booking.Messege : booking.Data);
     }
 }
