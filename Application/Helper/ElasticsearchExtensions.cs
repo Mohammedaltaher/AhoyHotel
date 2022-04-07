@@ -3,21 +3,21 @@ using Microsoft.Extensions.DependencyInjection;
 using Nest;
 
 namespace Application.Helper;
-public static class ElasticsearchExtensions
+public static class ElasticSearchExtensions
 {
-    public static void AddElasticsearch(this IServiceCollection services, IConfiguration configuration)
+    public static void AddElasticSearch(this IServiceCollection services, IConfiguration configuration)
     {
-        var settings = new ConnectionSettings(new Uri(configuration["elasticsearch:url"]))
-            .BasicAuthentication(configuration["elasticsearch:username"], configuration["elasticsearch:password"])
-            .CertificateFingerprint(configuration["elasticsearch:certificate"])
-            .DefaultIndex(configuration["elasticsearch:index"]);
+        var settings = new ConnectionSettings(new Uri(configuration["elastic-search:url"]))
+            .BasicAuthentication(configuration["elastic-search:username"], configuration["elastic-search:password"])
+            .CertificateFingerprint(configuration["elastic-search:certificate"])
+            .DefaultIndex(configuration["elastic-search:index"]);
 
         AddDefaultMappings(settings);
 
         ElasticClient client = new(settings);
         services.AddSingleton(client);
 
-        CreateIndex(client, configuration["elasticsearch:index"]);
+        CreateIndex(client, configuration["elastic-search:index"]);
     }
 
     private static void AddDefaultMappings(ConnectionSettings settings)

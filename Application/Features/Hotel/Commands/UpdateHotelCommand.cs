@@ -27,7 +27,7 @@ public class UpdateHotelCommand : MediatR.IRequest<HotelModel>
         }
         public async Task<HotelModel> Handle(UpdateHotelCommand command, CancellationToken cancellationToken)
         {
-            var hotel = _context.Hotels.Where(a => a.Id == command.Id).FirstOrDefault();
+            var hotel = _context.Hotels.FirstOrDefault(a => a.Id == command.Id);
 
             if (hotel == null)
             {
@@ -35,7 +35,7 @@ public class UpdateHotelCommand : MediatR.IRequest<HotelModel>
                 {
                     Data = null,
                     StatusCode = 404,
-                    Messege = "no data found"
+                    Message = "no data found"
                 };
             }
             else
@@ -50,14 +50,14 @@ public class UpdateHotelCommand : MediatR.IRequest<HotelModel>
                 await _context.SaveChangesAsync();
                 try
                 {
-                    await _elasticClient.UpdateAsync(new DocumentPath<Domain.Entities.Hotel>(hotel), u => u.Doc(hotel));
+                    await _elasticClient.UpdateAsync(new DocumentPath<Domain.Entities.Hotel>(hotel), u => u.Doc(hotel), cancellationToken);
                 }
                 catch(Exception ex) { _logger.LogError(ex.ToString()); }
                 return new HotelModel
                 {
                     Data = _mapper.Map<HotelDto>(hotel),
                     StatusCode = 200,
-                    Messege = "Data has been updated"
+                    Message = "Data has been updated"
                 };
             }
         }

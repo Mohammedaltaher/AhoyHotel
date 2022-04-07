@@ -3,7 +3,7 @@
 namespace Application.Features.Hotel.Commands;
 public class CreateHotelReviewCommand : IRequest<BaseModel>
 {
-    public string RevieweName { get; set; }
+    public string ReviewName { get; set; }
     public string ReviewerEmail { get; set; }
     public string Description { get; set; }
     public int Rating { get; set; }
@@ -20,7 +20,7 @@ public class CreateHotelReviewCommand : IRequest<BaseModel>
         {
             Review review = new()
             {
-                RevieweName = command.RevieweName,
+                ReviewName = command.ReviewName,
                 ReviewerEmail = command.ReviewerEmail,
                 Description = command.Description,
                 Rating = command.Rating,
@@ -31,7 +31,7 @@ public class CreateHotelReviewCommand : IRequest<BaseModel>
             return new BaseModel
             {
                 StatusCode = 200,
-                Messege = "Data has been added"
+                Message = "Data has been added"
             };
         }
     }

@@ -1,5 +1,4 @@
-﻿using Application;
-using Application.Interfaces;
+﻿using Application.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -16,7 +15,7 @@ public static class DependencyInjection
                 b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)));
         services.AddScoped<IApplicationDbContext>(provider => provider.GetService<ApplicationDbContext>());
 
-        // services.AddElasticsearch(configuration);
+        // services.AddElasticSearch(configuration);
         //services.AddScoped<IElasticSearchService, ElasticSearchService>();
         //services.AddScoped<IElasticSearchService>(provider => provider.GetService<ElasticSearchService>());
     }

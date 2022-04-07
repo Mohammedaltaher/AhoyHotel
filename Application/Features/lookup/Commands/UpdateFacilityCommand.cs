@@ -5,7 +5,7 @@ public class UpdateFacilityCommand : IRequest<FacilityModel>
 {
     public int Id { get; set; }
     public string Name { get; set; }
-    private string Icon { get; set; }
+    private readonly string _icon = null;
     public class UpdateFacilityCommandHandler : IRequestHandler<UpdateFacilityCommand, FacilityModel>
     {
         private readonly IApplicationDbContext _context;
@@ -26,20 +26,20 @@ public class UpdateFacilityCommand : IRequest<FacilityModel>
                 {
                     Data = null,
                     StatusCode = 404,
-                    Messege = "no data found"
+                    Message = "no data found"
                 };
             }
             else
             {
                 facility.Name = command.Name;
-                facility.Icon = command.Icon; 
+                facility.Icon = command._icon;
 
                 await _context.SaveChangesAsync();
                 return new FacilityModel
                 {
                     Data = _mapper.Map<FacilityDto>(facility),
                     StatusCode = 200,
-                    Messege = "Data has been updated"
+                    Message = "Data has been updated"
                 };
             }
         }

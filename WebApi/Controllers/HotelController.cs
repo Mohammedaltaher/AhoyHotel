@@ -13,8 +13,8 @@ public class HotelController : BaseApiController
     [HttpPost]
     public async Task<IActionResult> Create(CreateHotelCommand command)
     {
-        var Hotel = await Mediator.Send(command);
-        return StatusCode(Hotel.StatusCode, Hotel.Data);
+        var hotel = await Mediator.Send(command);
+        return StatusCode(hotel.StatusCode, hotel.Data);
     }
     /// <summary>
     /// Add Hotel Facility.
@@ -24,8 +24,8 @@ public class HotelController : BaseApiController
     [HttpPost("add/facility")]
     public async Task<IActionResult> AddHotelFacility(CreateHotelFacilityCommand command)
     {
-        var HotelFacility = await Mediator.Send(command);
-        return StatusCode(HotelFacility.StatusCode, HotelFacility.Messege);
+        var hotelFacility = await Mediator.Send(command);
+        return StatusCode(hotelFacility.StatusCode, hotelFacility.Message);
 
     }
     /// <summary>
@@ -36,8 +36,8 @@ public class HotelController : BaseApiController
     [HttpPost("add/room")]
     public async Task<IActionResult> AddHotelRoom(CreateHotelRoomsCommand command)
     {
-        var HotelRoom = await Mediator.Send(command);
-        return StatusCode(HotelRoom.StatusCode, HotelRoom.Messege);
+        var hotelRoom = await Mediator.Send(command);
+        return StatusCode(hotelRoom.StatusCode, hotelRoom.Message);
 
     }
     /// <summary>
@@ -48,8 +48,8 @@ public class HotelController : BaseApiController
     [HttpPost("add/review")]
     public async Task<IActionResult> AddHotelReview(CreateHotelReviewCommand command)
     {
-        var HotelReview = await Mediator.Send(command);
-        return StatusCode(HotelReview.StatusCode, HotelReview.Messege);
+        var hotelReview = await Mediator.Send(command);
+        return StatusCode(hotelReview.StatusCode, hotelReview.Message);
 
     }
     /// <summary>
@@ -65,13 +65,13 @@ public class HotelController : BaseApiController
         {
             return BadRequest("wrong file extension");
         }
-        var ImageUrl = await Mediator.Send(new UploadFileCommand
+        var imageUrl = await Mediator.Send(new UploadFileCommand
         {
             FormFile = image,
             Path = Directory.GetCurrentDirectory() + @"\Uploads\HotelImages",
         });
-        var Hotelimage = await Mediator.Send(new CreateHotelImageCommand { HotelId = hotelId, Url = ImageUrl });
-        return StatusCode(Hotelimage.StatusCode, Hotelimage.Messege);
+        var hotelImage = await Mediator.Send(new CreateHotelImageCommand { HotelId = hotelId, Url = imageUrl });
+        return StatusCode(hotelImage.StatusCode, hotelImage.Message);
     }
     /// <summary>
     /// Search Hotels.
@@ -80,8 +80,8 @@ public class HotelController : BaseApiController
     [HttpPost("search")]
     public async Task<IActionResult> GetAll(SearchHotelsQuery query)
     {
-        var Hotels = await Mediator.Send(query);
-        return StatusCode(Hotels.StatusCode, Hotels.Data == null ? Hotels.Messege : Hotels.Data);
+        var hotels = await Mediator.Send(query);
+        return StatusCode(hotels.StatusCode, hotels.Data == null ? hotels.Message : hotels.Data);
     }
     /// <summary>
     /// Gets Hotel  by Id.
@@ -91,8 +91,8 @@ public class HotelController : BaseApiController
     [HttpGet("{id}")]
     public async Task<IActionResult> GetById(int id)
     {
-        var Hotel = await Mediator.Send(new GetHotelByIdQuery { Id = id });
-        return StatusCode(Hotel.StatusCode, Hotel.Data == null ? Hotel.Messege : Hotel.Data);
+        var hotel = await Mediator.Send(new GetHotelByIdQuery { Id = id });
+        return StatusCode(hotel.StatusCode, hotel.Data == null ? hotel.Message : hotel.Data);
 
     }
     /// <summary>
@@ -103,8 +103,8 @@ public class HotelController : BaseApiController
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(int id)
     {
-        var Hotel = await Mediator.Send(new DeleteHotelByIdCommand { Id = id });
-        return StatusCode(Hotel.StatusCode, Hotel.Data == null ? Hotel.Messege : Hotel.Data);
+        var hotel = await Mediator.Send(new DeleteHotelByIdCommand { Id = id });
+        return StatusCode(hotel.StatusCode, hotel.Data == null ? hotel.Message : hotel.Data);
     }
     /// <summary>
     /// Updates the  Entity based on Id.   
@@ -119,8 +119,8 @@ public class HotelController : BaseApiController
         {
             return BadRequest();
         }
-        var Hotel = await Mediator.Send(command);
-        return StatusCode(Hotel.StatusCode, Hotel.Data == null ? Hotel.Messege : Hotel.Data);
+        var hotel = await Mediator.Send(command);
+        return StatusCode(hotel.StatusCode, hotel.Data == null ? hotel.Message : hotel.Data);
     }
     private bool IsWrongFileExtension(IFormFile file)
     {

@@ -16,17 +16,17 @@ public class CreateHotelImageCommand : IRequest<BaseModel>
         }
         public async Task<BaseModel> Handle(CreateHotelImageCommand command, CancellationToken cancellationToken)
         {
-            HotelImage Image = new()
+            HotelImage image = new()
             {
                 Url = command.Url,
                 HotelId = command.HotelId,
             };
-            _context.HotelImages.Add(Image);
+            _context.HotelImages.Add(image);
             await _context.SaveChangesAsync();
             return new BaseModel
             {
                 StatusCode = 200,
-                Messege = "Data has been added"
+                Message = "Data has been added"
             };
         }
     }

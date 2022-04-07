@@ -22,17 +22,23 @@ public class ErrorController : BaseApiController
     [Route("/development")]
     public IActionResult ErrorLocalDevelopment([FromServices] IWebHostEnvironment webHostEnvironment)
     {
-        var error = HttpContext.Features.Get<IExceptionHandlerFeature>().Error;
+        var error = HttpContext.Features.Get<IExceptionHandlerFeature>()?.Error;
 
-        if (error.GetType().IsAssignableFrom(typeof(ValidationException)))
+        if (error != null && error.GetType().IsAssignableFrom(typeof(ValidationException)))
         {
             return BadRequest(error.Message);
         }
-        var problem = Problem(detail: error.StackTrace, title: error.Message);
 
-        _logger.LogError(problem.ToString());
+        if (error != null)
+        {
+            var problem = Problem(detail: error.StackTrace, title: error.Message);
 
-        return problem;
+            _logger.LogError(problem.ToString());
+
+            return problem;
+        }
+
+        return BadRequest();
     }
     /// <summary>
     /// Live Error
@@ -43,10 +49,15 @@ public class ErrorController : BaseApiController
     [Route("/live")]
     public IActionResult Error()
     {
-        var error = HttpContext.Features.Get<IExceptionHandlerFeature>().Error;
+        var error = HttpContext.Features.Get<IExceptionHandlerFeature>()?.Error;
 
-        _logger.LogError(Problem(detail: error.StackTrace, title: error.Message).ToString());
+        if (error != null)
+        {
+            _logger.LogError(Problem(detail: error.StackTrace, title: error.Message).ToString());
 
-        return Problem(title: error.Message);
+            return Problem(title: error.Message);
+        }
+
+        return BadRequest();
     }
 }

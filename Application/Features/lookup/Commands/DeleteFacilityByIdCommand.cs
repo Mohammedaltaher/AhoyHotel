@@ -22,16 +22,16 @@ public class DeleteFacilityByIdCommand : IRequest<FacilityModel>
                 {
                     Data = null,
                     StatusCode = 404,
-                    Messege = "No data found"
+                    Message = "No data found"
                 };
-            };
+            }
             facility.IsDeleted = true;
             await _context.SaveChangesAsync();
             return new FacilityModel
             {
                 Data = _mapper.Map<FacilityDto>(facility),
                 StatusCode = 200,
-                Messege = "Data has been Deleted"
+                Message = "Data has been Deleted"
             };
         }
     }

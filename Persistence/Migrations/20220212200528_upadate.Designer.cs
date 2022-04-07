@@ -225,7 +225,7 @@ namespace Persistence.Migrations
                     b.Property<int>("Rating")
                         .HasColumnType("int");
 
-                    b.Property<string>("RevieweName")
+                    b.Property<string>("ReviewName")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ReviewerEmail")

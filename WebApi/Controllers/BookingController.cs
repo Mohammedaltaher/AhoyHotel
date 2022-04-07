@@ -12,6 +12,6 @@ public class BookingController : BaseApiController
     public async Task<IActionResult> Create(CreateBookingCommand command)
     {
         var booking = await Mediator.Send(command);
-        return StatusCode(booking.StatusCode, booking.Data == null ? booking.Messege : booking.Data);
+        return StatusCode(booking.StatusCode, booking.Data == null ? booking.Message : booking.Data);
     }
 }

@@ -27,7 +27,7 @@ public class GetAllFacilityQuery : Pagination, IRequest<FacilitiesModel>
             {
                 Data = _mapper.Map<List<FacilityDto>>(facilityList),
                 StatusCode = 200,
-                Messege = "Data found"
+                Message = "Data found"
             };
         }
   

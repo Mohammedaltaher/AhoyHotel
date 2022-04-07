@@ -29,7 +29,7 @@ public class CreateHotelRoomsCommand : IRequest<BaseModel>
             return new BaseModel
             {
                 StatusCode = 200,
-                Messege = "Data has been added"
+                Message = "Data has been added"
             };
         }
     }

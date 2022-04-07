@@ -1,7 +1,7 @@
 ﻿namespace Domain.Common;
 public abstract class BaseEntity
 {
-    public BaseEntity()
+    protected BaseEntity()
     {
         CreateDate = DateTime.Now;
         UpdateDate = DateTime.Now;

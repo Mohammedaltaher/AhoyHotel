@@ -4,7 +4,7 @@ using Microsoft.Extensions.Logging;
 namespace WebApi.Test;
 public static class MockServices
 {
-    public static IMapper GetMockedMapper<I>()
+    public static IMapper GetMockedMapper<T>()
     {
         MapperConfiguration mappingConfig = new(profile =>
         {
@@ -14,6 +14,6 @@ public static class MockServices
         });
         return mappingConfig.CreateMapper();
     }
-    public static ILogger<T> GetMockedLoger<T>() => new Mock<ILogger<T>>().Object;
+    public static ILogger<T> GetMockedLogger<T>() => new Mock<ILogger<T>>().Object;
 
 }

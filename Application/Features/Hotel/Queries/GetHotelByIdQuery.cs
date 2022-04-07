@@ -28,14 +28,14 @@ public class GetHotelByIdQuery : IRequest<HotelModel>
                 {
                     Data = null,
                     StatusCode = 404,
-                    Messege = "No data found"
+                    Message = "No data found"
                 });
             }
             return Task.FromResult(new HotelModel
             {
                 Data = _mapper.Map<HotelDto>(hotel),
                 StatusCode = 200,
-                Messege = "Data found"
+                Message = "Data found"
             });
         }
     }

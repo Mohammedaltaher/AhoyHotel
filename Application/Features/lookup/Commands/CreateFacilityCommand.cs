@@ -25,16 +25,16 @@ public class CreateFacilityCommand : IRequest<FacilityModel>
             {
                 Data = _mapper.Map<FacilityDto>(facility),
                 StatusCode = 200,
-                Messege = "Data has been added"
+                Message = "Data has been added"
             };
         }
     }
 
 
 }
-public class CreateFacilitysCommandValidator : AbstractValidator<CreateFacilityCommand>
+public class CreateFacilityCommandValidator : AbstractValidator<CreateFacilityCommand>
 {
-    public CreateFacilitysCommandValidator()
+    public CreateFacilityCommandValidator()
     {
         RuleFor(x => x.Name)
             .NotEmpty()

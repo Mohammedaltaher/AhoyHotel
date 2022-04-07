@@ -26,7 +26,7 @@ public static class DependencyInjection
         });
         var mapper = mapperConfig.CreateMapper();
         services.AddSingleton(mapper);
-        services.AddElasticsearch(configuration);
+        services.AddElasticSearch(configuration);
     }
 }
 

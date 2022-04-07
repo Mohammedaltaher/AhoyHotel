@@ -39,7 +39,7 @@ public class CreateHotelCommand : MediatR.IRequest<HotelModel>
             {
                 Data = _mapper.Map<HotelDto>(hotel),
                 StatusCode = 200,
-                Messege = "Data has been added"
+                Message = "Data has been added"
             };
         }
     }

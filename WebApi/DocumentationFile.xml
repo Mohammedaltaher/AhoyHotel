@@ -6,7 +6,7 @@
     <members>
         <member name="P:WebApi.Controllers.BaseApiController.Mediator">
             <summary>
-            Get Meditor 
+            Get Mediator 
             </summary>
         </member>
         <member name="M:WebApi.Controllers.BookingController.Create(Application.Features.Booking.Commands.CreateBookingCommand)">
@@ -29,28 +29,28 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:WebApi.Controllers.HotelController.Create(Application.Features.HotelFeatures.Commands.CreateHotelCommand)">
+        <member name="M:WebApi.Controllers.HotelController.Create(Application.Features.Hotel.Commands.CreateHotelCommand)">
             <summary>
             Creates a New Hotel.
             </summary>
             <param name="command"></param>
             <returns></returns>
         </member>
-        <member name="M:WebApi.Controllers.HotelController.AddHotelFacility(Application.Features.HotelFeatures.Commands.CreateHotelFacilityCommand)">
+        <member name="M:WebApi.Controllers.HotelController.AddHotelFacility(Application.Features.Hotel.Commands.CreateHotelFacilityCommand)">
             <summary>
             Add Hotel Facility.
             </summary>
             <param name="command"></param>
             <returns></returns>
         </member>
-        <member name="M:WebApi.Controllers.HotelController.AddHotelRoom(Application.Features.HotelFeatures.Commands.CreateHotelRoomsCommand)">
+        <member name="M:WebApi.Controllers.HotelController.AddHotelRoom(Application.Features.Hotel.Commands.CreateHotelRoomsCommand)">
             <summary>
             Add Hotel Room.
             </summary>
             <param name="command"></param>
             <returns></returns>
         </member>
-        <member name="M:WebApi.Controllers.HotelController.AddHotelReview(Application.Features.HotelFeatures.Commands.CreateHotelReviewCommand)">
+        <member name="M:WebApi.Controllers.HotelController.AddHotelReview(Application.Features.Hotel.Commands.CreateHotelReviewCommand)">
             <summary>
             Add Hotel Review.
             </summary>
@@ -65,7 +65,7 @@
             <param name="hotelId"></param>
             <returns></returns>
         </member>
-        <member name="M:WebApi.Controllers.HotelController.GetAll(Application.Features.HotelFeatures.Queries.SearchHotelsQuery)">
+        <member name="M:WebApi.Controllers.HotelController.GetAll(Application.Features.Hotel.Queries.SearchHotelsQuery)">
             <summary>
             Search Hotels.
             </summary>
@@ -85,7 +85,7 @@
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="M:WebApi.Controllers.HotelController.Update(System.Int32,Application.Features.HotelFeatures.Commands.UpdateHotelCommand)">
+        <member name="M:WebApi.Controllers.HotelController.Update(System.Int32,Application.Features.Hotel.Commands.UpdateHotelCommand)">
             <summary>
             Updates the  Entity based on Id.   
             </summary>
@@ -93,16 +93,16 @@
             <param name="command"></param>
             <returns></returns>
         </member>
-        <member name="M:WebApi.Controllers.LookupController.Create(Application.Features.LookUp.Commands.CreateFacilityCommand)">
+        <member name="M:WebApi.Controllers.LookupController.Create(Application.Features.lookup.Commands.CreateFacilityCommand)">
             <summary>
             Creates a New Facility.
             </summary>
             <param name="command"></param>
             <returns></returns>
         </member>
-        <member name="M:WebApi.Controllers.LookupController.GetAll(Application.Features.FacilityFeatures.Queries.GetAllFacilityQuery)">
+        <member name="M:WebApi.Controllers.LookupController.GetAll(Application.Features.lookup.Queries.GetAllFacilityQuery)">
             <summary>
-            Gets all Facilitys.
+            Gets all Facility.
             </summary>
             <returns></returns>
         </member>
@@ -120,7 +120,7 @@
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="M:WebApi.Controllers.LookupController.Update(System.Int32,Application.Features.LookUp.Commands.UpdateFacilityCommand)">
+        <member name="M:WebApi.Controllers.LookupController.Update(System.Int32,Application.Features.lookup.Commands.UpdateFacilityCommand)">
             <summary>
             Updates the Facility  based on Id.   
             </summary>

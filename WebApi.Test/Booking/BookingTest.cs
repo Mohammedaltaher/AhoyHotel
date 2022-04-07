@@ -4,24 +4,24 @@ namespace WebApi.Test.Booking;
 public class BookingTest : IClassFixture<SharedDatabaseFixture>
 {
     public SharedDatabaseFixture Fixture { get; }
-    private readonly Mock<IApplicationDbContext> MockContext;
+    private readonly Mock<IApplicationDbContext> _mockContext;
 
 
     public BookingTest(SharedDatabaseFixture fixture)
     {
         Fixture = fixture;
-        MockContext = new Mock<IApplicationDbContext>();
-        MockContext.Setup(db => db.Bookings).Returns(SharedDatabaseFixture.CreateContext().Bookings);
+        _mockContext = new Mock<IApplicationDbContext>();
+        _mockContext.Setup(db => db.Bookings).Returns(SharedDatabaseFixture.CreateContext().Bookings);
     }
 
     [Fact]
     public async Task Can_Add_Booking()
     {
-        CreateBookingCommandHandler  handler = new(MockContext.Object, MockServices.GetMockedMapper<IMapper>());
+        CreateBookingCommandHandler  handler = new(_mockContext.Object, MockServices.GetMockedMapper<IMapper>());
         var  result = await handler.Handle(BookingData.MockCreateBookingCommand(), CancellationToken.None);
-        var  Booking = result.Data;
+        var  booking = result.Data;
 
-        Assert.Equal(BookingData.MockCreateBookingCommand().UserName, Booking.UserName); 
+        Assert.Equal(BookingData.MockCreateBookingCommand().UserName, booking.UserName); 
     }
 
 }

@@ -10,69 +10,69 @@ namespace WebApi.Test.Lookup.Facility;
 public class FacilityTest : IClassFixture<SharedDatabaseFixture>
 {
     public SharedDatabaseFixture Fixture { get; }
-    private readonly Mock<IApplicationDbContext> MockContext;
+    private readonly Mock<IApplicationDbContext> _mockContext;
 
 
     public FacilityTest(SharedDatabaseFixture fixture)
     {
         Fixture = fixture;
-        MockContext = new Mock<IApplicationDbContext>();
-        MockContext.Setup(db => db.Facilities).Returns(SharedDatabaseFixture.CreateContext().Facilities);
+        _mockContext = new Mock<IApplicationDbContext>();
+        _mockContext.Setup(db => db.Facilities).Returns(SharedDatabaseFixture.CreateContext().Facilities);
     }
 
 
     [Fact]
-    public async Task Can_Get_All_Facilitys()
+    public async Task Can_Get_All_Facilities()
     {
-        GetAllFacilityQueryHandler handler = new(MockContext.Object, MockServices.GetMockedMapper<IMapper>());
+        GetAllFacilityQueryHandler handler = new(_mockContext.Object, MockServices.GetMockedMapper<IMapper>());
         var result = await handler.Handle(new GetAllFacilityQuery (), CancellationToken.None);
-        List<FacilityDto> Facility = result.Data;
-        Assert.NotNull(Facility);
-        Assert.Equal(FacilityData.MockFacilitySamples()[0].Name, Facility[0].Name);
+        List<FacilityDto> facility = result.Data;
+        Assert.NotNull(facility);
+        Assert.Equal(FacilityData.MockFacilitySamples()[0].Name, facility[0].Name);
     }
 
 
     [Fact]
     public async Task Can_Get_Facility_By_Id()
     {
-        GetFacilityByIdQueryHandler handler = new(MockContext.Object, MockServices.GetMockedMapper<IMapper>());
+        GetFacilityByIdQueryHandler handler = new(_mockContext.Object, MockServices.GetMockedMapper<IMapper>());
         var result = await handler.Handle(FacilityData.MockGetFacilityByIdQuery(), CancellationToken.None);
-        var Facility = result.Data;
+        var facility = result.Data;
 
-        Assert.Equal(FacilityData.MockFacilitySamples()[0].Name, Facility.Name);
+        Assert.Equal(FacilityData.MockFacilitySamples()[0].Name, facility.Name);
     }
 
 
     [Fact]
     public async Task Can_Add_Facility()
     {
-        CreateFacilityCommandHandler handler = new(MockContext.Object, MockServices.GetMockedMapper<IMapper>());
+        CreateFacilityCommandHandler handler = new(_mockContext.Object, MockServices.GetMockedMapper<IMapper>());
         var result = await handler.Handle(FacilityData.MockCreateFacilityCommand(), CancellationToken.None);
-        var Facility = result.Data;
+        var facility = result.Data;
 
-        Assert.Equal(FacilityData.MockCreateFacilityCommand().Name, Facility.Name);
+        Assert.Equal(FacilityData.MockCreateFacilityCommand().Name, facility.Name);
     }
 
 
     [Fact]
     public async Task Can_Update_Facility()
     {
-        UpdateFacilityCommandHandler handler = new(MockContext.Object, MockServices.GetMockedMapper<IMapper>());
+        UpdateFacilityCommandHandler handler = new(_mockContext.Object, MockServices.GetMockedMapper<IMapper>());
         var result = await handler.Handle(FacilityData.MockUpdateFacilityCommand(), CancellationToken.None);
-        var Facility =  result.Data;
+        var facility =  result.Data;
 
-        Assert.Equal(FacilityData.MockUpdateFacilityCommand().Name, Facility.Name);
+        Assert.Equal(FacilityData.MockUpdateFacilityCommand().Name, facility.Name);
     }
 
 
     [Fact]
     public async Task Can_Delete_Facility()
     {
-        DeleteFacilityByIdCommandHandler handler = new(MockContext.Object, MockServices.GetMockedMapper<IMapper>());
+        DeleteFacilityByIdCommandHandler handler = new(_mockContext.Object, MockServices.GetMockedMapper<IMapper>());
         var result = await handler.Handle(FacilityData.MockDeleteFacilityByIdCommand(), CancellationToken.None);
-        var Facility =  result.Data;
+        var facility =  result.Data;
 
-        Assert.Equal(FacilityData.MockFacilitySamples()[0].Name, Facility.Name);
+        Assert.Equal(FacilityData.MockFacilitySamples()[0].Name, facility.Name);
     }
 }
 

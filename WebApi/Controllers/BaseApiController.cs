@@ -3,11 +3,11 @@
 namespace WebApi.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/[controller]/facility")]
 public abstract class BaseApiController : ControllerBase
 {
     /// <summary>
-    /// Get Meditor 
+    /// Get Mediator 
     /// </summary>
     public IMediator Mediator => HttpContext.RequestServices.GetService<IMediator>();
     //protected IMediator Mediator

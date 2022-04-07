@@ -23,14 +23,14 @@ public class GetFacilityByIdQuery : IRequest<FacilityModel>
                 {
                     Data = null,
                     StatusCode = 404,
-                    Messege = "No data found"
+                    Message = "No data found"
                 });
             }
             return Task.FromResult(new FacilityModel
             {
                 Data = _mapper.Map<FacilityDto>(facility),
                 StatusCode = 200,
-                Messege = "Data found"
+                Message = "Data found"
             });
         }
     }

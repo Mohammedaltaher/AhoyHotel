@@ -1,7 +1,6 @@
 ﻿using Application.Interfaces;
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -37,16 +36,16 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
    
     private void UpdateUpdateDate()
     {
-        var UpdateDate = "UpdateDate";
+        var updateDate = "UpdateDate";
         ChangeTracker.DetectChanges();
         var modified = ChangeTracker.Entries().Where(x => x.State == EntityState.Modified);
         foreach (var entity in modified)
         {
             foreach (var prop in entity.Properties)
             {
-                if (prop.Metadata.Name == UpdateDate)
+                if (prop.Metadata.Name == updateDate)
                 {
-                    entity.CurrentValues[UpdateDate] = DateTime.Now;
+                    entity.CurrentValues[updateDate] = DateTime.Now;
                 }
             }
         }

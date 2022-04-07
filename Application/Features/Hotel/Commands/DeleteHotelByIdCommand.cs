@@ -21,27 +21,28 @@ public class DeleteHotelByIdCommand : MediatR.IRequest<HotelModel>
         }
         public async Task<HotelModel> Handle(DeleteHotelByIdCommand command, CancellationToken cancellationToken)
         {
-            var hotel = await _context.Hotels.Where(a => a.Id == command.Id).FirstOrDefaultAsync();
+            var hotel = await _context.Hotels.Where(a => a.Id == command.Id).FirstOrDefaultAsync(cancellationToken: cancellationToken);
             if (hotel == null)
             {
                 return new HotelModel
                 {
                     Data = null,
                     StatusCode = 404,
-                    Messege = "No data found"
+                    Message = "No data found"
                 };
-            };
+            }
+
             hotel.IsDeleted = true;
             await _context.SaveChangesAsync();
 
-            try { await _elasticClient.DeleteAsync<Domain.Entities.Hotel>(hotel); }
+            try { await _elasticClient.DeleteAsync<Domain.Entities.Hotel>(hotel, ct: cancellationToken); }
             catch (Exception ex) { _logger.LogError(ex.ToString()); }
 
             return new HotelModel
             {
                 Data = _mapper.Map<HotelDto>(hotel),
                 StatusCode = 200,
-                Messege = "Data has been Deleted"
+                Message = "Data has been Deleted"
             };
         }
     }

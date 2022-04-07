@@ -50,7 +50,7 @@ public class SearchHotelsQuery : Pagination, MediatR.IRequest<HotelsModel>
                                                    .Field(f => f.Name).Query(query.Name)
                                                    //.Field(f => f.Email).Query(query.Email)
                                                    //.Field(f => f.PhoneNumber).Query(query.PhoneNumber)
-                                                   )));
+                                                   )), cancellationToken);
                 hotelList = searchResponse.Documents.ToList();
 
             }
@@ -70,22 +70,13 @@ public class SearchHotelsQuery : Pagination, MediatR.IRequest<HotelsModel>
                     .OrderBy(o => o.Name)
                     .Skip((query.PageNumber - 1) * query.PageSize)
                     .Take(query.PageSize)
-                    .ToListAsync();
-            if (hotelList == null)
-            {
-                return new HotelsModel
-                {
-                    Data = null,
-                    StatusCode = 404,
-                    Messege = "No data found"
-                };
-            }
+                    .ToListAsync(cancellationToken: cancellationToken);
             _mapper.Map<List<HotelDto>>(hotelList);
             return new HotelsModel
             {
                 Data = _mapper.Map<List<HotelDto>>(hotelList),
                 StatusCode = 200,
-                Messege = "Data found"
+                Message = "Data found"
             };
         }
 

@@ -1,6 +1,5 @@
 ﻿global using System.Threading.Tasks;
 global using System.Collections.Generic;
-global using Domain.Entities;
 global using System.Threading;
 global using Application.Interfaces;
 global using AutoMapper;

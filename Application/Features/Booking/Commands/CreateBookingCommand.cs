@@ -34,7 +34,7 @@ public class CreateBookingCommand : IRequest<BookingModel>
             {
                 Data = _mapper.Map<BookingDto>(booking),
                 StatusCode = 200,
-                Messege = "Data has been added"
+                Message = "Data has been added"
             };
         }
     }
