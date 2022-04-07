@@ -1,7 +1,9 @@
-﻿namespace Application.Features.LookUp.Commands;
+﻿using Application.Dto;
+
+namespace Application.Features.lookup.Commands;
 public class DeleteFacilityByIdCommand : IRequest<FacilityModel>
 {
-    public int Id { get; set; }
+    public int Id { get; init; }
     public class DeleteFacilityByIdCommandHandler : IRequestHandler<DeleteFacilityByIdCommand, FacilityModel>
     {
         private readonly IApplicationDbContext _context;
@@ -13,7 +15,7 @@ public class DeleteFacilityByIdCommand : IRequest<FacilityModel>
         }
         public async Task<FacilityModel> Handle(DeleteFacilityByIdCommand command, CancellationToken cancellationToken)
         {
-            var facility = await _context.Facilities.Where(a => a.Id == command.Id).FirstOrDefaultAsync();
+            var facility = await _context.Facilities.Where(a => a.Id == command.Id).FirstOrDefaultAsync(cancellationToken: cancellationToken);
             if (facility == null)
             {
                 return new FacilityModel

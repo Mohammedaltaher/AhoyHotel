@@ -2,7 +2,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Nest;
 
-namespace Application;
+namespace Application.Helper;
 public static class ElasticsearchExtensions
 {
     public static void AddElasticsearch(this IServiceCollection services, IConfiguration configuration)

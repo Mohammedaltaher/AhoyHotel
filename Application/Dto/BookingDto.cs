@@ -1,4 +1,6 @@
-﻿namespace Application.Model;
+﻿using Application.Dto.Common;
+
+namespace Application.Dto;
 public class BookingDto
 {
     public int Id { get; set; }

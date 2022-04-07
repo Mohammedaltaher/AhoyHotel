@@ -1,6 +1,7 @@
-﻿using Application.Features.LookUp.Commands;
+﻿using Application.Dto;
+using Application.Features.lookup.Commands;
 
-namespace Application.Common.Mapper;
+namespace Application.Mapper;
 public class LookupProfile : Profile
 {
     public LookupProfile()

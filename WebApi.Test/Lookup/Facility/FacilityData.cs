@@ -1,16 +1,16 @@
-using Application.Features.LookUp.Commands;
-using Application.Features.LookUp.Queries;
+using Application.Features.lookup.Commands;
+using Application.Features.lookup.Queries;
 
-namespace WebApi.Test;
+namespace WebApi.Test.Lookup.Facility;
 public static class FacilityData
 {
-    public static List<Facility> MockFacilitySamples() => new()
+    public static List<Domain.Entities.Facility> MockFacilitySamples() => new()
     {
-        new Facility()
+        new Domain.Entities.Facility()
         {
             Name = "Facility2"
         },
-        new Facility()
+        new Domain.Entities.Facility()
         {
             Name = "Facility2",
         }

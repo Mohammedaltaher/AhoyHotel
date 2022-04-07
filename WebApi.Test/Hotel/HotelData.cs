@@ -1,12 +1,12 @@
-using Application.Features.HotelFeatures.Commands;
-using Application.Features.HotelFeatures.Queries;
+using Application.Features.Hotel.Commands;
+using Application.Features.Hotel.Queries;
 
-namespace WebApi.Test;
+namespace WebApi.Test.Hotel;
 public static class HotelData
 {
-    public static List<Hotel> MockHotelSamples() => new()
+    public static List<Domain.Entities.Hotel> MockHotelSamples() => new()
     {
-        new Hotel()
+        new Domain.Entities.Hotel()
         {
             Name = "Hotel2",
             PhoneNumber = "0585199391",
@@ -14,7 +14,7 @@ public static class HotelData
             Address = "Dubai",
             Description = "good hotel",
         },
-        new Hotel()
+        new Domain.Entities.Hotel()
         {
             Name = "Hotel",
             PhoneNumber = "0584875391",

@@ -1,6 +1,6 @@
 using static Application.Features.Booking.Commands.CreateBookingCommand;
 
-namespace WebApi.Test;
+namespace WebApi.Test.Booking;
 public class BookingTest : IClassFixture<SharedDatabaseFixture>
 {
     public SharedDatabaseFixture Fixture { get; }

@@ -1,7 +1,8 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Application.Dto;
+using Microsoft.Extensions.Logging;
 using Nest;
 
-namespace Application.Features.HotelFeatures.Commands;
+namespace Application.Features.Hotel.Commands;
 public class DeleteHotelByIdCommand : MediatR.IRequest<HotelModel>
 {
     public int Id { get; set; }
@@ -33,7 +34,7 @@ public class DeleteHotelByIdCommand : MediatR.IRequest<HotelModel>
             hotel.IsDeleted = true;
             await _context.SaveChangesAsync();
 
-            try { await _elasticClient.DeleteAsync<Hotel>(hotel); }
+            try { await _elasticClient.DeleteAsync<Domain.Entities.Hotel>(hotel); }
             catch (Exception ex) { _logger.LogError(ex.ToString()); }
 
             return new HotelModel

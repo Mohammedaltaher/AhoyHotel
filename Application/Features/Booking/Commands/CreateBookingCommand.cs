@@ -1,4 +1,6 @@
-﻿namespace Application.Features.Booking.Commands;
+﻿using Application.Dto;
+
+namespace Application.Features.Booking.Commands;
 public class CreateBookingCommand : IRequest<BookingModel>
 {
     public DateTime CheckIn { get; set; }

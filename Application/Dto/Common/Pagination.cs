@@ -1,4 +1,4 @@
-﻿namespace Application.Model;
+﻿namespace Application.Dto.Common;
 public class Pagination
 {
     const int maxPageSize = 50;

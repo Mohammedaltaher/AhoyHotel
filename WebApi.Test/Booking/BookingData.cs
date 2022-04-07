@@ -1,6 +1,6 @@
 using Application.Features.Booking.Commands;
 
-namespace WebApi.Test;
+namespace WebApi.Test.Booking;
 public static class BookingData
 {
     public static CreateBookingCommand MockCreateBookingCommand() => new()

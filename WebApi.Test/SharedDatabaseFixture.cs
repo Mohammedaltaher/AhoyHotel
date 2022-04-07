@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Persistence.Context;
+using WebApi.Test.Hotel;
+using WebApi.Test.Lookup.Facility;
 
 namespace WebApi.Test;
 public class SharedDatabaseFixture

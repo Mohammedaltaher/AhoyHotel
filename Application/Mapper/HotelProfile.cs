@@ -1,6 +1,7 @@
-﻿using Application.Features.HotelFeatures.Commands;
+﻿using Application.Dto;
+using Application.Features.Hotel.Commands;
 
-namespace Application.Common.Mapper;
+namespace Application.Mapper;
 public class HotelProfile : Profile
 {
     public HotelProfile()

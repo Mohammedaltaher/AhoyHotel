@@ -1,12 +1,13 @@
-using Application.Features.HotelFeatures.Queries;
-using static Application.Features.HotelFeatures.Commands.CreateHotelCommand;
-using static Application.Features.HotelFeatures.Queries.GetHotelByIdQuery;
-using static Application.Features.HotelFeatures.Commands.UpdateHotelCommand;
-using static Application.Features.HotelFeatures.Commands.DeleteHotelByIdCommand;
-using static Application.Features.HotelFeatures.Queries.SearchHotelsQuery;
-using Application.Features.HotelFeatures.Commands;
+using Application.Dto;
+using Application.Features.Hotel.Commands;
+using Application.Features.Hotel.Queries;
+using static Application.Features.Hotel.Commands.CreateHotelCommand;
+using static Application.Features.Hotel.Queries.GetHotelByIdQuery;
+using static Application.Features.Hotel.Commands.UpdateHotelCommand;
+using static Application.Features.Hotel.Commands.DeleteHotelByIdCommand;
+using static Application.Features.Hotel.Queries.SearchHotelsQuery;
 
-namespace WebApi.Test;
+namespace WebApi.Test.Hotel;
 public class HotelTest : IClassFixture<SharedDatabaseFixture>
 {
     public SharedDatabaseFixture Fixture { get; }

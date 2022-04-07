@@ -1,4 +1,4 @@
-using Application.Common.Mapper;
+using Application.Mapper;
 using Microsoft.Extensions.Logging;
 
 namespace WebApi.Test;

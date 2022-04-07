@@ -1,9 +1,10 @@
-﻿using Application.Common.Mapper;
-using Application.Filters;
+﻿using Application.Filters;
 using FluentValidation;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
+using Application.Helper;
+using Application.Mapper;
 
 namespace Application;
 public static class DependencyInjection

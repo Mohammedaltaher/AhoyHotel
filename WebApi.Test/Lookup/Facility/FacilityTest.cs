@@ -1,11 +1,12 @@
-using Application.Features.FacilityFeatures.Queries;
-using static Application.Features.FacilityFeatures.Queries.GetAllFacilityQuery;
-using static Application.Features.LookUp.Queries.GetFacilityByIdQuery;
-using static Application.Features.LookUp.Commands.CreateFacilityCommand;
-using static Application.Features.LookUp.Commands.UpdateFacilityCommand;
-using static Application.Features.LookUp.Commands.DeleteFacilityByIdCommand;
+using Application.Dto;
+using Application.Features.lookup.Queries;
+using static Application.Features.lookup.Queries.GetAllFacilityQuery;
+using static Application.Features.lookup.Queries.GetFacilityByIdQuery;
+using static Application.Features.lookup.Commands.CreateFacilityCommand;
+using static Application.Features.lookup.Commands.UpdateFacilityCommand;
+using static Application.Features.lookup.Commands.DeleteFacilityByIdCommand;
 
-namespace WebApi.Test;
+namespace WebApi.Test.Lookup.Facility;
 public class FacilityTest : IClassFixture<SharedDatabaseFixture>
 {
     public SharedDatabaseFixture Fixture { get; }

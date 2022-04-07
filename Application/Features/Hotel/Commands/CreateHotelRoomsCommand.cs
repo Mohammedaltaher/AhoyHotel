@@ -1,4 +1,6 @@
-﻿namespace Application.Features.HotelFeatures.Commands;
+﻿using Application.Dto.Common;
+
+namespace Application.Features.Hotel.Commands;
 public class CreateHotelRoomsCommand : IRequest<BaseModel>
 {
     public int RoomNo { get; set; }

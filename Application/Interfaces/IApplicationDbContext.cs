@@ -7,7 +7,7 @@ public interface IApplicationDbContext
     DbSet<HotelImage> HotelImages { get; set; }
     DbSet<Facility> Facilities { get; set; }
     DbSet<Room> Rooms { get; set; }
-    DbSet<Booking> Bookings { get; set; }
+     DbSet<Booking> Bookings { get; set; }
     DbSet<Review> Reviews { get; set; }
     Task<int> SaveChangesAsync();
 }

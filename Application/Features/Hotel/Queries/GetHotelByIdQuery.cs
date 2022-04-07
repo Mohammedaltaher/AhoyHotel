@@ -1,4 +1,6 @@
-﻿namespace Application.Features.HotelFeatures.Queries;
+﻿using Application.Dto;
+
+namespace Application.Features.Hotel.Queries;
 public class GetHotelByIdQuery : IRequest<HotelModel>
 {
     public int Id { get; set; }

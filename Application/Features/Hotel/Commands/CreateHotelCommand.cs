@@ -1,8 +1,9 @@
-﻿using FluentValidation;
+﻿using Application.Dto;
+using FluentValidation;
 using Microsoft.Extensions.Logging;
 using Nest;
 
-namespace Application.Features.HotelFeatures.Commands;
+namespace Application.Features.Hotel.Commands;
 public class CreateHotelCommand : MediatR.IRequest<HotelModel>
 {
     public string Name { get; set; }
@@ -26,7 +27,7 @@ public class CreateHotelCommand : MediatR.IRequest<HotelModel>
         }
         public async Task<HotelModel> Handle(CreateHotelCommand command, CancellationToken cancellationToken)
         {
-            var hotel = _mapper.Map<Hotel>(command);
+            var hotel = _mapper.Map<Domain.Entities.Hotel>(command);
             _context.Hotels.Add(hotel);
             await _context.SaveChangesAsync();
             try

@@ -1,9 +1,11 @@
-﻿namespace Application.Features.LookUp.Commands;
+﻿using Application.Dto;
+
+namespace Application.Features.lookup.Commands;
 public class UpdateFacilityCommand : IRequest<FacilityModel>
 {
     public int Id { get; set; }
     public string Name { get; set; }
-    public string Icon { get; set; }
+    private string Icon { get; set; }
     public class UpdateFacilityCommandHandler : IRequestHandler<UpdateFacilityCommand, FacilityModel>
     {
         private readonly IApplicationDbContext _context;
@@ -16,7 +18,7 @@ public class UpdateFacilityCommand : IRequest<FacilityModel>
         }
         public async Task<FacilityModel> Handle(UpdateFacilityCommand command, CancellationToken cancellationToken)
         {
-            var facility = _context.Facilities.Where(a => a.Id == command.Id).FirstOrDefault();
+            var facility = _context.Facilities.FirstOrDefault(a => a.Id == command.Id);
 
             if (facility == null)
             {

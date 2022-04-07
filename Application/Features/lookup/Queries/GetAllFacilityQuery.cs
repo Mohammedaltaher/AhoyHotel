@@ -1,4 +1,7 @@
-﻿namespace Application.Features.FacilityFeatures.Queries;
+﻿using Application.Dto;
+using Application.Dto.Common;
+
+namespace Application.Features.lookup.Queries;
 public class GetAllFacilityQuery : Pagination, IRequest<FacilitiesModel>
 {
 
@@ -18,16 +21,7 @@ public class GetAllFacilityQuery : Pagination, IRequest<FacilitiesModel>
                     .OrderBy(o => o.Name)
                     .Skip((query.PageNumber - 1) * query.PageSize)
                     .Take(query.PageSize)
-                    .ToListAsync();
-            if (facilityList == null)
-            {
-                return new FacilitiesModel
-                {
-                    Data = null,
-                    StatusCode = 404,
-                    Messege = "No data found"
-                };
-            }
+                    .ToListAsync(cancellationToken: cancellationToken);
             _mapper.Map<List<FacilityDto>>(facilityList);
             return new FacilitiesModel
             {

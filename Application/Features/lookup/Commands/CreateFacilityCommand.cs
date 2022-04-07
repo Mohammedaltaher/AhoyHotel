@@ -1,6 +1,7 @@
-﻿using FluentValidation;
+﻿using Application.Dto;
+using FluentValidation;
 
-namespace Application.Features.LookUp.Commands;
+namespace Application.Features.lookup.Commands;
 public class CreateFacilityCommand : IRequest<FacilityModel>
 {
     public string Name { get; set; }

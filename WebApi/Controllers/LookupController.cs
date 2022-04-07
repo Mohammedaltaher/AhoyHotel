@@ -1,6 +1,5 @@
-﻿using Application.Features.FacilityFeatures.Queries;
-using Application.Features.LookUp.Commands;
-using Application.Features.LookUp.Queries;
+﻿using Application.Features.lookup.Commands;
+using Application.Features.lookup.Queries;
 
 namespace WebApi.Controllers;
 public class LookupController : BaseApiController

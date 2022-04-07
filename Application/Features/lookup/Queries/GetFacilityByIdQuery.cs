@@ -1,4 +1,6 @@
-﻿namespace Application.Features.LookUp.Queries;
+﻿using Application.Dto;
+
+namespace Application.Features.lookup.Queries;
 public class GetFacilityByIdQuery : IRequest<FacilityModel>
 {
     public int Id { get; set; }

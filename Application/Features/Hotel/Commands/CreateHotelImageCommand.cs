@@ -1,6 +1,7 @@
-﻿using FluentValidation;
+﻿using Application.Dto.Common;
+using FluentValidation;
 
-namespace Application.Features.HotelFeatures.Commands;
+namespace Application.Features.Hotel.Commands;
 public class CreateHotelImageCommand : IRequest<BaseModel>
 {
     public string Url { get; set; }

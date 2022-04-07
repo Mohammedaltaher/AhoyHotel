@@ -1,6 +1,7 @@
-﻿using Application.Features.Booking.Commands;
+﻿using Application.Dto;
+using Application.Features.Booking.Commands;
 
-namespace Application.Common.Mapper;
+namespace Application.Mapper;
 public class BookingProfile : Profile
 {
     public BookingProfile()

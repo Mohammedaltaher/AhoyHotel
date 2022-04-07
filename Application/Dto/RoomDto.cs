@@ -1,4 +1,4 @@
-﻿namespace Application.Model;
+﻿namespace Application.Dto;
 public class RoomDto
 {
     public int Id { get; set; }

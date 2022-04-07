@@ -20,13 +20,10 @@ public class FluentValidationPipelineBehaviorFilter<TRequest, TResponse> : IPipe
             .Where(f => f != null)
             .ToList();
 
-        if (failures.Any())
-        {
-            var error = string.Join("\r\n", failures);
-            throw new ValidationException(error);
-        }
+        if (!failures.Any()) return next();
+        var error = string.Join("\r\n", failures);
+        throw new ValidationException(error);
 
-        return next();
     }
 }
 

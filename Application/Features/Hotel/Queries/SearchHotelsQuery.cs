@@ -1,9 +1,10 @@
-﻿using LinqKit;
+﻿using Application.Dto;
+using Application.Dto.Common;
+using LinqKit;
 using Microsoft.Extensions.Logging;
 using Nest;
-using System.Linq.Expressions;
 
-namespace Application.Features.HotelFeatures.Queries;
+namespace Application.Features.Hotel.Queries;
 public class SearchHotelsQuery : Pagination, MediatR.IRequest<HotelsModel>
 {
     public string Name { get; set; }
@@ -25,7 +26,7 @@ public class SearchHotelsQuery : Pagination, MediatR.IRequest<HotelsModel>
         }
         public async Task<HotelsModel> Handle(SearchHotelsQuery query, CancellationToken cancellationToken)
         {
-            var predicate = PredicateBuilder.True<Hotel>();
+            var predicate = PredicateBuilder.True<Domain.Entities.Hotel>();
 
             if (!string.IsNullOrEmpty(query.Name))
             {
@@ -39,10 +40,10 @@ public class SearchHotelsQuery : Pagination, MediatR.IRequest<HotelsModel>
             {
                 predicate = predicate.And(i => i.PhoneNumber.Contains(query.PhoneNumber));
             }
-            List<Hotel> hotelList = null;
+            List<Domain.Entities.Hotel> hotelList = null;
             try
             {
-                var searchResponse = await _elasticClient.SearchAsync<Hotel>(s => s
+                var searchResponse = await _elasticClient.SearchAsync<Domain.Entities.Hotel>(s => s
                                                 .From((query.PageNumber - 1) * query.PageSize).Size(query.PageSize)
                                                 .Query(q => q
                                                 .Match(m => m

@@ -6,7 +6,7 @@ namespace Application.Features.Common.Commands;
 public class UploadFileCommand : IRequest<string>
 {
 
-    public IFormFile FormFile { get; set; }
+    public IFormFile FormFile { get; init; }
     public string Path { get; set; }
 
     public class UploadFileCommandHandler : IRequestHandler<UploadFileCommand, string>
@@ -22,10 +22,9 @@ public class UploadFileCommand : IRequest<string>
             {
                 Directory.CreateDirectory(command.Path);
             }
-            using (FileStream stream = new(command.Path + @"\" + fileName, FileMode.Create))
-            {
-                await command.FormFile.CopyToAsync(stream);
-            }
+
+            await using FileStream stream = new(command.Path + @"\" + fileName, FileMode.Create);
+            await command.FormFile.CopyToAsync(stream, cancellationToken);
             return fileName;
         }
     }

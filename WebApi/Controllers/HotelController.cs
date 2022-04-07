@@ -1,6 +1,6 @@
 ﻿using Application.Features.Common.Commands;
-using Application.Features.HotelFeatures.Commands;
-using Application.Features.HotelFeatures.Queries;
+using Application.Features.Hotel.Commands;
+using Application.Features.Hotel.Queries;
 
 namespace WebApi.Controllers;
 public class HotelController : BaseApiController

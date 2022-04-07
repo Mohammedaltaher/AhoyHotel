@@ -1,6 +1,8 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Application.Dto;
+using Microsoft.Extensions.Logging;
 using Nest;
-namespace Application.Features.HotelFeatures.Commands;
+
+namespace Application.Features.Hotel.Commands;
 public class UpdateHotelCommand : MediatR.IRequest<HotelModel>
 {
     public int Id { get; set; }
@@ -48,7 +50,7 @@ public class UpdateHotelCommand : MediatR.IRequest<HotelModel>
                 await _context.SaveChangesAsync();
                 try
                 {
-                    await _elasticClient.UpdateAsync(new DocumentPath<Hotel>(hotel), u => u.Doc(hotel));
+                    await _elasticClient.UpdateAsync(new DocumentPath<Domain.Entities.Hotel>(hotel), u => u.Doc(hotel));
                 }
                 catch(Exception ex) { _logger.LogError(ex.ToString()); }
                 return new HotelModel
