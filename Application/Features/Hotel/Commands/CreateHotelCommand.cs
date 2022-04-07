@@ -26,7 +26,7 @@ public class CreateHotelCommand : MediatR.IRequest<HotelModel>
         }
         public async Task<HotelModel> Handle(CreateHotelCommand command, CancellationToken cancellationToken)
         {
-            Hotel hotel = _mapper.Map<Hotel>(command);
+            var hotel = _mapper.Map<Hotel>(command);
             _context.Hotels.Add(hotel);
             await _context.SaveChangesAsync();
             try

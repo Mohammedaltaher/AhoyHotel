@@ -14,7 +14,7 @@ public class GetAllFacilityQuery : Pagination, IRequest<FacilitiesModel>
         public async Task<FacilitiesModel> Handle(GetAllFacilityQuery query, CancellationToken cancellationToken)
         {
            
-            List<Facility> facilityList = await _context.Facilities
+            var facilityList = await _context.Facilities
                     .OrderBy(o => o.Name)
                     .Skip((query.PageNumber - 1) * query.PageSize)
                     .Take(query.PageSize)

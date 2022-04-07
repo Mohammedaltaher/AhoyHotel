@@ -1,4 +1,4 @@
-﻿using Application.FeaturesBooking.Commands;
+﻿using Application.Features.Booking.Commands;
 
 namespace Application.Common.Mapper;
 public class BookingProfile : Profile

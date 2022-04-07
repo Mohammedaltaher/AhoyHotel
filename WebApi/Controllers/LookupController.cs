@@ -13,7 +13,7 @@ public class LookupController : BaseApiController
     [HttpPost("facility")]
     public async Task<IActionResult> Create(CreateFacilityCommand command)
     {
-        FacilityModel Facility = await Mediator.Send(command);
+        var Facility = await Mediator.Send(command);
         return StatusCode(Facility.StatusCode, Facility.Data == null ? Facility.Messege : Facility.Data);
     }
     /// <summary>
@@ -24,7 +24,7 @@ public class LookupController : BaseApiController
     public async Task<IActionResult> GetAll(GetAllFacilityQuery query)
     {
 
-        FacilitiesModel Facilities = await Mediator.Send(query);
+        var Facilities = await Mediator.Send(query);
         return StatusCode(Facilities.StatusCode, Facilities.Data == null ? Facilities.Messege : Facilities.Data);
     }
     /// <summary>
@@ -35,7 +35,7 @@ public class LookupController : BaseApiController
     [HttpGet("facility/{id}")]
     public async Task<IActionResult> GetById(int id)
     {
-        FacilityModel Facility = await Mediator.Send(new GetFacilityByIdQuery { Id = id });
+        var Facility = await Mediator.Send(new GetFacilityByIdQuery { Id = id });
         return StatusCode(Facility.StatusCode, Facility.Data == null ? Facility.Messege : Facility.Data);
 
     }
@@ -47,7 +47,7 @@ public class LookupController : BaseApiController
     [HttpDelete("facility/{id}")]
     public async Task<IActionResult> Delete(int id)
     {
-        FacilityModel Facility = await Mediator.Send(new DeleteFacilityByIdCommand { Id = id });
+        var Facility = await Mediator.Send(new DeleteFacilityByIdCommand { Id = id });
         return StatusCode(Facility.StatusCode, Facility.Data == null ? Facility.Messege : Facility.Data);
     }
     /// <summary>
@@ -63,7 +63,7 @@ public class LookupController : BaseApiController
         {
             return BadRequest();
         }
-        FacilityModel Facility = await Mediator.Send(command);
+        var Facility = await Mediator.Send(command);
         return StatusCode(Facility.StatusCode, Facility.Data == null ? Facility.Messege : Facility.Data);
     }
 }

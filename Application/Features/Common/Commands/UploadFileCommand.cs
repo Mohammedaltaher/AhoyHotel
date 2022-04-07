@@ -14,9 +14,9 @@ public class UploadFileCommand : IRequest<string>
         
         public async Task<string> Handle(UploadFileCommand command, CancellationToken cancellationToken)
         {
-            string extension = "." + command.FormFile.FileName.Split('.')[command.FormFile.FileName.Split('.').Length - 1];
+            var extension = "." + command.FormFile.FileName.Split('.')[command.FormFile.FileName.Split('.').Length - 1];
 
-            string fileName = DateTime.Now.Ticks + extension;
+            var fileName = DateTime.Now.Ticks + extension;
             command.Path = command.Path;
             if (!Directory.Exists(command.Path))
             {

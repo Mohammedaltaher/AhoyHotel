@@ -16,7 +16,7 @@ public class UpdateFacilityCommand : IRequest<FacilityModel>
         }
         public async Task<FacilityModel> Handle(UpdateFacilityCommand command, CancellationToken cancellationToken)
         {
-            Facility facility = _context.Facilities.Where(a => a.Id == command.Id).FirstOrDefault();
+            var facility = _context.Facilities.Where(a => a.Id == command.Id).FirstOrDefault();
 
             if (facility == null)
             {

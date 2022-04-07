@@ -40,9 +40,9 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
         var UpdateDate = "UpdateDate";
         ChangeTracker.DetectChanges();
         var modified = ChangeTracker.Entries().Where(x => x.State == EntityState.Modified);
-        foreach (EntityEntry entity in modified)
+        foreach (var entity in modified)
         {
-            foreach (PropertyEntry prop in entity.Properties)
+            foreach (var prop in entity.Properties)
             {
                 if (prop.Metadata.Name == UpdateDate)
                 {

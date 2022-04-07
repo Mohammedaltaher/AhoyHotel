@@ -7,7 +7,7 @@ public static class ElasticsearchExtensions
 {
     public static void AddElasticsearch(this IServiceCollection services, IConfiguration configuration)
     {
-        ConnectionSettings settings = new ConnectionSettings(new Uri(configuration["elasticsearch:url"]))
+        var settings = new ConnectionSettings(new Uri(configuration["elasticsearch:url"]))
             .BasicAuthentication(configuration["elasticsearch:username"], configuration["elasticsearch:password"])
             .CertificateFingerprint(configuration["elasticsearch:certificate"])
             .DefaultIndex(configuration["elasticsearch:index"]);

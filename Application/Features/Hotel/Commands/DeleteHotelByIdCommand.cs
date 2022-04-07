@@ -20,7 +20,7 @@ public class DeleteHotelByIdCommand : MediatR.IRequest<HotelModel>
         }
         public async Task<HotelModel> Handle(DeleteHotelByIdCommand command, CancellationToken cancellationToken)
         {
-            Hotel hotel = await _context.Hotels.Where(a => a.Id == command.Id).FirstOrDefaultAsync();
+            var hotel = await _context.Hotels.Where(a => a.Id == command.Id).FirstOrDefaultAsync();
             if (hotel == null)
             {
                 return new HotelModel

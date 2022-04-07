@@ -22,13 +22,13 @@ public class ErrorController : BaseApiController
     [Route("/development")]
     public IActionResult ErrorLocalDevelopment([FromServices] IWebHostEnvironment webHostEnvironment)
     {
-        Exception error = HttpContext.Features.Get<IExceptionHandlerFeature>().Error;
+        var error = HttpContext.Features.Get<IExceptionHandlerFeature>().Error;
 
         if (error.GetType().IsAssignableFrom(typeof(ValidationException)))
         {
             return BadRequest(error.Message);
         }
-        ObjectResult problem = Problem(detail: error.StackTrace, title: error.Message);
+        var problem = Problem(detail: error.StackTrace, title: error.Message);
 
         _logger.LogError(problem.ToString());
 
@@ -43,7 +43,7 @@ public class ErrorController : BaseApiController
     [Route("/live")]
     public IActionResult Error()
     {
-        Exception error = HttpContext.Features.Get<IExceptionHandlerFeature>().Error;
+        var error = HttpContext.Features.Get<IExceptionHandlerFeature>().Error;
 
         _logger.LogError(Problem(detail: error.StackTrace, title: error.Message).ToString());
 

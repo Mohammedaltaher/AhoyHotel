@@ -1,4 +1,4 @@
-using Application.FeaturesBooking.Commands;
+using Application.Features.Booking.Commands;
 
 namespace WebApi.Test;
 public static class BookingData

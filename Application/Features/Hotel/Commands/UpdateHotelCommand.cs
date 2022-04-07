@@ -25,7 +25,7 @@ public class UpdateHotelCommand : MediatR.IRequest<HotelModel>
         }
         public async Task<HotelModel> Handle(UpdateHotelCommand command, CancellationToken cancellationToken)
         {
-            Hotel hotel = _context.Hotels.Where(a => a.Id == command.Id).FirstOrDefault();
+            var hotel = _context.Hotels.Where(a => a.Id == command.Id).FirstOrDefault();
 
             if (hotel == null)
             {

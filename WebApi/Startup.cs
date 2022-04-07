@@ -11,7 +11,7 @@ using System.Text.Json.Serialization;
 namespace WebApi;
 public class Startup
 {
-    public IConfiguration Configuration { get; }
+    private IConfiguration Configuration { get; }
     public Startup(IConfiguration configuration) => Configuration = configuration;
     public void ConfigureServices(IServiceCollection services)
     {
@@ -19,7 +19,7 @@ public class Startup
         services.AddApplication(Configuration);
         services.AddSwaggerGen(c =>
         {
-            c.IncludeXmlComments(string.Format(@"{0}DocumentationFile.xml", AppDomain.CurrentDomain.BaseDirectory));
+            c.IncludeXmlComments($@"{AppDomain.CurrentDomain.BaseDirectory}DocumentationFile.xml");
             c.SwaggerDoc("v1", new OpenApiInfo
             {
                 Version = "v1",

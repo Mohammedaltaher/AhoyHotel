@@ -14,7 +14,7 @@ public class GetFacilityByIdQuery : IRequest<FacilityModel>
         }
         public Task<FacilityModel> Handle(GetFacilityByIdQuery query, CancellationToken cancellationToken)
         {
-            Facility facility = _context.Facilities.Where(a => a.Id == query.Id).AsNoTracking().FirstOrDefault();
+            var facility = _context.Facilities.Where(a => a.Id == query.Id).AsNoTracking().FirstOrDefault();
             if (facility == null)
             {
                 return Task.FromResult(new FacilityModel

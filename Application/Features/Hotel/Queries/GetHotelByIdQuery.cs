@@ -14,7 +14,7 @@ public class GetHotelByIdQuery : IRequest<HotelModel>
         }
         public Task<HotelModel> Handle(GetHotelByIdQuery query, CancellationToken cancellationToken)
         {
-            Hotel hotel = _context.Hotels
+            var hotel = _context.Hotels
                 .Include(x => x.Reviews)
                     .Include(x => x.Images)
                     .Include(x => x.HotelFacilities).ThenInclude(y => y.Facility)

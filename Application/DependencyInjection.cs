@@ -23,7 +23,7 @@ public static class DependencyInjection
             profile.AddProfile(new LookupProfile());
             profile.AddProfile(new BookingProfile());
         });
-        IMapper mapper = mapperConfig.CreateMapper();
+        var mapper = mapperConfig.CreateMapper();
         services.AddSingleton(mapper);
         services.AddElasticsearch(configuration);
     }

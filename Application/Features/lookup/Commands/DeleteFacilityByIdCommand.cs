@@ -13,7 +13,7 @@ public class DeleteFacilityByIdCommand : IRequest<FacilityModel>
         }
         public async Task<FacilityModel> Handle(DeleteFacilityByIdCommand command, CancellationToken cancellationToken)
         {
-            Facility facility = await _context.Facilities.Where(a => a.Id == command.Id).FirstOrDefaultAsync();
+            var facility = await _context.Facilities.Where(a => a.Id == command.Id).FirstOrDefaultAsync();
             if (facility == null)
             {
                 return new FacilityModel

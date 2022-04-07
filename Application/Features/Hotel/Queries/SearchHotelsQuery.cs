@@ -25,7 +25,7 @@ public class SearchHotelsQuery : Pagination, MediatR.IRequest<HotelsModel>
         }
         public async Task<HotelsModel> Handle(SearchHotelsQuery query, CancellationToken cancellationToken)
         {
-            Expression<Func<Hotel, bool>> predicate = PredicateBuilder.True<Hotel>();
+            var predicate = PredicateBuilder.True<Hotel>();
 
             if (!string.IsNullOrEmpty(query.Name))
             {
@@ -42,7 +42,7 @@ public class SearchHotelsQuery : Pagination, MediatR.IRequest<HotelsModel>
             List<Hotel> hotelList = null;
             try
             {
-                ISearchResponse<Hotel> searchResponse = await _elasticClient.SearchAsync<Hotel>(s => s
+                var searchResponse = await _elasticClient.SearchAsync<Hotel>(s => s
                                                 .From((query.PageNumber - 1) * query.PageSize).Size(query.PageSize)
                                                 .Query(q => q
                                                 .Match(m => m

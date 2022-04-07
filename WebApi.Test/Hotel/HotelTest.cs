@@ -25,7 +25,7 @@ public class HotelTest : IClassFixture<SharedDatabaseFixture>
     public async Task Can_Get_All_Hotels()
     {
         SearchHotelsQueryHandler  handler = new(MockContext.Object, MockServices.GetMockedMapper<IMapper>(), MockServices.GetMockedLoger<SearchHotelsQuery>());
-        HotelsModel  result = await handler.Handle(new SearchHotelsQuery(), CancellationToken.None);
+        var  result = await handler.Handle(new SearchHotelsQuery(), CancellationToken.None);
         List<HotelDto>  Hotel = result.Data;
         Assert.NotNull(Hotel);
         Assert.Equal(HotelData.MockHotelSamples()[1].Name, Hotel[0].Name);
@@ -36,8 +36,8 @@ public class HotelTest : IClassFixture<SharedDatabaseFixture>
     public async Task Can_Get_Hotel_By_Id()
     {
         GetHotelByIdQueryHandler  handler = new(MockContext.Object, MockServices.GetMockedMapper<IMapper>());
-        HotelModel  result = await handler.Handle(HotelData.MockGetHotelByIdQuery(), CancellationToken.None);
-        HotelDto  Hotel = result.Data;
+        var  result = await handler.Handle(HotelData.MockGetHotelByIdQuery(), CancellationToken.None);
+        var  Hotel = result.Data;
 
         Assert.Equal(HotelData.MockHotelSamples()[0].Name, Hotel.Name);
     }
@@ -47,8 +47,8 @@ public class HotelTest : IClassFixture<SharedDatabaseFixture>
     public async Task Can_Add_Hotel()
     {
         CreateHotelCommandHandler  handler = new(MockContext.Object, MockServices.GetMockedMapper<IMapper>(),MockServices.GetMockedLoger<CreateHotelCommand>());
-        HotelModel  result = await handler.Handle(HotelData.MockCreateHotelCommand(), CancellationToken.None);
-        HotelDto  Hotel = result.Data;
+        var  result = await handler.Handle(HotelData.MockCreateHotelCommand(), CancellationToken.None);
+        var  Hotel = result.Data;
 
         Assert.Equal(HotelData.MockCreateHotelCommand().Name, Hotel.Name);
     }
@@ -58,8 +58,8 @@ public class HotelTest : IClassFixture<SharedDatabaseFixture>
     public async Task Can_Update_Hotel()
     {
         UpdateHotelCommandHandler  handler = new(MockContext.Object, MockServices.GetMockedMapper<IMapper>(), MockServices.GetMockedLoger<UpdateHotelCommand>());
-        HotelModel  result = await handler.Handle(HotelData.MockUpdateHotelCommand(), CancellationToken.None);
-        HotelDto  Hotel = result.Data;
+        var  result = await handler.Handle(HotelData.MockUpdateHotelCommand(), CancellationToken.None);
+        var  Hotel = result.Data;
 
         Assert.Equal(HotelData.MockUpdateHotelCommand().Name, Hotel.Name);
     }
@@ -69,8 +69,8 @@ public class HotelTest : IClassFixture<SharedDatabaseFixture>
     public async Task Can_Delete_Hotel()
     {
         DeleteHotelByIdCommandHandler  handler = new(MockContext.Object, MockServices.GetMockedMapper<IMapper>(), MockServices.GetMockedLoger<DeleteHotelByIdCommand>());
-        HotelModel  result = await handler.Handle(HotelData.MockDeleteHotelByIdCommand(), CancellationToken.None);
-        HotelDto  Hotel = result.Data;
+        var  result = await handler.Handle(HotelData.MockDeleteHotelByIdCommand(), CancellationToken.None);
+        var  Hotel = result.Data;
 
         Assert.Equal(HotelData.MockHotelSamples()[0].Name, Hotel.Name);
     }

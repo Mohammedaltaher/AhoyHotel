@@ -1,4 +1,4 @@
-using static Application.FeaturesBooking.Commands.CreateBookingCommand;
+using static Application.Features.Booking.Commands.CreateBookingCommand;
 
 namespace WebApi.Test;
 public class BookingTest : IClassFixture<SharedDatabaseFixture>
@@ -18,8 +18,8 @@ public class BookingTest : IClassFixture<SharedDatabaseFixture>
     public async Task Can_Add_Booking()
     {
         CreateBookingCommandHandler  handler = new(MockContext.Object, MockServices.GetMockedMapper<IMapper>());
-        BookingModel  result = await handler.Handle(BookingData.MockCreateBookingCommand(), CancellationToken.None);
-        BookingDto  Booking = result.Data;
+        var  result = await handler.Handle(BookingData.MockCreateBookingCommand(), CancellationToken.None);
+        var  Booking = result.Data;
 
         Assert.Equal(BookingData.MockCreateBookingCommand().UserName, Booking.UserName); 
     }

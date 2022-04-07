@@ -17,7 +17,7 @@ public class CreateFacilityCommand : IRequest<FacilityModel>
         }
         public async Task<FacilityModel> Handle(CreateFacilityCommand command, CancellationToken cancellationToken)
         {
-            Facility facility = _mapper.Map<Facility>(command);
+            var facility = _mapper.Map<Facility>(command);
             _context.Facilities.Add(facility);
             await _context.SaveChangesAsync();
             return new FacilityModel

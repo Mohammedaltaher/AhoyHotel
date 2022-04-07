@@ -11,7 +11,7 @@ public class SharedDatabaseFixture
     {
         if (!_databaseInitialized)
         {
-            using ApplicationDbContext context = CreateContext();
+            using var context = CreateContext();
             context.Database.EnsureDeleted();
             context.Database.EnsureCreated();
 
